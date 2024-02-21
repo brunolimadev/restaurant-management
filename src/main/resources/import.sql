@@ -1,0 +1,17 @@
+insert into user (name, email) values ('Bruno Lima', 'bruno@test.com.br');
+
+insert into food_type (name) values ('Japanese'), ('Italian'), ('Brazilian'), ('Mexican'), ('Chinese');
+
+insert into restaurant (name, food_type_id) values ('Sushi Yoshi', 1), ('Mamamia Italian Food', 2), ('Churrascaria Good Grill', 3), ('TacoMex', 4), ('Chinese House', 5);
+
+insert into table(restaurant_id, description, number_of_seats) values (1, 'Table 1', 4), (1, 'Table 2', 4), (1, 'Table 3', 4), (1, 'Table 4', 4), (1, 'Table 5', 4), (2, 'Table 1', 4), (2, 'Table 2', 4), (2, 'Table 3', 4), (2, 'Table 4', 4), (2, 'Table 5', 4), (3, 'Table 1', 4), (3, 'Table 2', 4), (3, 'Table 3', 4), (3, 'Table 4', 4), (3, 'Table 5', 4), (4, 'Table 1', 4), (4, 'Table 2', 4), (4, 'Table 3', 4), (4, 'Table 4', 4), (4, 'Table 5', 4), (5, 'Table 1', 4), (5, 'Table 2', 4), (5, 'Table 3', 4), (5, 'Table 4', 4), (5, 'Table 5', 4);
+
+insert into address (restaurant_id, street, number, complement, neighborhood, city, state, zip_code) values (1, 'Rua dos Bobos', 0, 'Apto 101', 'Centro', 'São Paulo', 'SP', '01001-000'), (2, 'Rua dos Bobos', 0, 'Apto 102', 'Centro', 'São Paulo', 'SP', '01001-000'), (3, 'Rua dos Bobos', 0, 'Apto 103', 'Centro', 'São Paulo', 'SP', '01001-000'), (4, 'Rua dos Bobos', 0, 'Apto 104', 'Centro', 'São Paulo', 'SP', '01001-000'), (5, 'Rua dos Bobos', 0, 'Apto 105', 'Centro', 'São Paulo', 'SP', '01001000');
+
+insert into opening_hours (restaurant_id, day_of_week, opening_time, closing_time) values (1, 'MONDAY', '11:00', '23:00'), (1, 'TUESDAY', '11:00', '23:00'), (1, 'WEDNESDAY', '11:00', '23:00'), (1, 'THURSDAY', '11:00', '23:00'), (1, 'FRIDAY', '11:00', '23:00'), (1, 'SATURDAY', '11:00', '23:00'), (1, 'SUNDAY', '11:00', '23:00'), (2, 'MONDAY', '11:00', '23:00'), (2, 'TUESDAY', '11:00', '23:00'), (2, 'WEDNESDAY', '11:00', '23:00'), (2, 'THURSDAY', '11:00', '23:00'), (2, 'FRIDAY', '11:00', '23:00'), (2, 'SATURDAY', '11:00', '23:00'), (2, 'SUNDAY', '11:00', '23:00'), (3, 'MONDAY', '11:00', '23:00'), (3, 'TUESDAY', '11:00', '23:00'), (3, 'WEDNESDAY', '11:00', '23:00'), (3, 'THURSDAY', '11:00', '23:00'), (3, 'FRIDAY', '11:00', '23:00'), (3, 'SATURDAY', '11:00', '23:00'), (3, 'SUNDAY', '11:00', '23:00'), (4, 'MONDAY', '11:00', '23:00'), (4, 'TUESDAY', '11:00', '23:00'), (4, 'WEDNESDAY', '11:00', '23:00'), (4, 'THURSDAY', '11:00', '23:00'), (4, 'FRIDAY', '11:00', '23:00'), (4, 'SATURDAY', '11:00', '23:00');
+
+insert into restaurant_comment (restaurant_id, user_id, comment) values (1, 1, 'Great food!'), (2, 1, 'Great food!'), (3, 1, 'Great food!'), (4, 1, 'Great food!'), (5, 1, 'Great food!');
+
+insert into restaurant_like (restaurant_id, user_id) values (1, 1), (2, 1), (3, 1), (4, 1), (5, 1);
+
+insert into reservation (restaurant_id, table_id, user_id, date, time, number_of_people) values (1, 1, 1, '2021-12-01', '12:00', 4), (1, 2, 1, '2021-12-01', '12:00', 4), (1, 3, 1, '2021-12-01', '12:00', 4), (1, 4, 1, '2021-12-01', '12:00', 4), (1, 5, 1, '2021-12-01', '12:00', 4), (2, 6, 1, '2021-12-01', '12:00', 4), (2, 7, 1, '2021-12-01', '12:00', 4), (2, 8, 1, '2021-12-01', '12:00', 4), (2, 9, 1, '2021-12-01', '12:00', 4), (2, 10, 1, '2021-12-01', '12:00', 4), (3, 11, 1, '2021-12-01', '12:00', 4), (3, 12, 1, '2021-12-01', '12:00', 4), (3, 13, 1, '2021-12-01', '12:00', 4), (3, 14, 1, '2021-12-01', '12:00', 4), (3, 15, 1, '2021-12-01', '12:00', 4), (4, 16, 1, '2021-12-01', '12:00', 4), (4, 17, 1, '2021-12-01', '12:00', 4), (4, 18, 1, '2021-12-01', '12:00', 4), (4, 19, 1, '2021-12-01', '12:00', 4), (4,

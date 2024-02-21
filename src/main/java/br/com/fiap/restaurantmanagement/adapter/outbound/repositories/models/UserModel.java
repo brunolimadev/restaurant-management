@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Entity
-@Table(name = "restaurant")
-public class RestaurantModel {
+@Table(name = "user")
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,7 @@ public class RestaurantModel {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "food_type_id")
-    private FoodTypeModel foodType;
-
+    @Column(name = "email")
+    private String email;
 
 }
