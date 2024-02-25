@@ -4,6 +4,9 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode
@@ -25,5 +28,9 @@ public class RestaurantCommentModel {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserModel user;
+
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }

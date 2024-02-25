@@ -2,25 +2,28 @@ package br.com.fiap.restaurantmanagement.domain.entities;
 
 public class Table {
 
-    private int number;
+    private String description;
     private int capacity;
-    private boolean isAvailable;
 
-    public Table(int number, int capacity, boolean isAvailable) {
-        this.number = number;
+
+    public Table(String description, int capacity) {
+        if (description == null || description.isEmpty())
+            throw new IllegalArgumentException("Description cannot be null or empty");
+
+        if (capacity <= 0)
+            throw new IllegalArgumentException("Capacity cannot be less than or equal to zero");
+
+        this.description = description;
         this.capacity = capacity;
-        this.isAvailable = isAvailable;
     }
 
-    public int getNumber() {
-        return number;
+    public String getDescription() {
+        return description;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
+
 }

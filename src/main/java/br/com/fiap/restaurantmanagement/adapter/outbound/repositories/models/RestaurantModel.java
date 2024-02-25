@@ -1,11 +1,13 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
+import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "restaurant")
 public class RestaurantModel {
@@ -21,5 +23,19 @@ public class RestaurantModel {
     @JoinColumn(name = "food_type_id")
     private FoodTypeModel foodType;
 
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    public static RestaurantModel fromDomain(RestaurantModel restaurantModel, Restaurant restaurant, Long foodTypeId) {
+        restaurantModel.setName(restaurant.getName());
+        restaurantModel.setFoodType(FoodTypeModel.fromDomain(restaurant.getTypeOfFood(), foodTypeId));
+        return restaurantModel;
+    }
+
+
+    public Restaurant toDomain() {
+        return new Restaurant(this.id, this.name, this.foodType.toDomain());
+    }
 
 }

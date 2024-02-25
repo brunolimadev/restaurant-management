@@ -1,8 +1,16 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
+import br.com.fiap.restaurantmanagement.domain.entities.Address;
+import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -38,8 +46,35 @@ public class AddressModel {
     @Column(name = "country")
     private String country;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id")
     private RestaurantModel restaurant;
+
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    public static List<AddressModel> fromDomain(Restaurant restaurant) {
+        List<AddressModel> addressModels = new ArrayList<>();
+
+        restaurant.getAddress().forEach(address -> {
+            AddressModel addressModel = new AddressModel();
+            addressModel.setStreet(address.getStreet());
+            addressModel.setNumber(address.getNumber());
+            addressModel.setComplement(address.getComplement());
+            addressModel.setNeighborhood(address.getNeighborhood());
+            addressModel.setCity(address.getCity());
+            addressModel.setState(address.getState());
+            addressModel.setZipCode(address.getZipCode());
+            addressModel.setCountry(address.getCountry());
+            addressModels.add(addressModel);
+        });
+
+        return addressModels;
+    }
+
+    public Address toDomain() {
+        return new Address(this.street, this.number, this.complement, this.neighborhood, this.city, this.state, this.zipCode, this.country);
+    }
 
 }

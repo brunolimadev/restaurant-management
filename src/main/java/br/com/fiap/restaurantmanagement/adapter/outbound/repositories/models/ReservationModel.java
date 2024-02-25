@@ -32,6 +32,6 @@ public class ReservationModel {
     private UserModel user;
 
     @OneToOne
-    @JoinColumn(name = "table_id")
+    @JoinColumn(name = "restaraunt_table_id")
     private TableModel table;
 }

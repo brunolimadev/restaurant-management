@@ -1,13 +1,19 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
+import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "table")
+@Table(name = "restaurant_table")
 public class TableModel {
 
     @Id
@@ -20,9 +26,27 @@ public class TableModel {
     @Column(name = "number_of_seats")
     private Integer numberOfSeats;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id")
     private RestaurantModel restaurant;
 
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    public static List<TableModel> fromDomain(Restaurant restaurant) {
+
+        List<TableModel> tableModels = new ArrayList<>();
+
+        restaurant.getTables().forEach(table -> {
+            TableModel tableModel = new TableModel();
+            tableModel.setDescription(table.getDescription());
+            tableModel.setNumberOfSeats(table.getCapacity());
+            tableModels.add(tableModel);
+        });
+
+        return tableModels;
+
+    }
 
 }

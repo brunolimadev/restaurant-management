@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "user")
+@Table(name = "restaurant_user")
 public class UserModel {
 
     @Id

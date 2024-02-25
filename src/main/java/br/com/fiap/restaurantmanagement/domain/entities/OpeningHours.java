@@ -4,12 +4,12 @@ import br.com.fiap.restaurantmanagement.domain.enumerators.DaysOfWeek;
 
 import java.time.LocalDateTime;
 
-public class OperatingPeriod {
+public class OpeningHours {
     private DaysOfWeek dayOfWeek;
-    private LocalDateTime openingTime;
-    private LocalDateTime closingTime;
+    private String openingTime;
+    private String closingTime;
 
-    public OperatingPeriod(DaysOfWeek dayOfWeek, LocalDateTime openingTime, LocalDateTime closingTime) {
+    public OpeningHours(DaysOfWeek dayOfWeek, String openingTime, String closingTime) {
         this.dayOfWeek = dayOfWeek;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
@@ -19,11 +19,11 @@ public class OperatingPeriod {
         return dayOfWeek;
     }
 
-    public LocalDateTime getOpeningTime() {
+    public String getOpeningTime() {
         return openingTime;
     }
 
-    public LocalDateTime getClosingTime() {
+    public String getClosingTime() {
         return closingTime;
     }
 }
