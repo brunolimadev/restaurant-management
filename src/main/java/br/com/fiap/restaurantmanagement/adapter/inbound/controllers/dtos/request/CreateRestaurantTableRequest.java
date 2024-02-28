@@ -1,6 +1,5 @@
 package br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request;
 
-import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.entities.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
