@@ -1,5 +1,6 @@
-package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
+package br.com.fiap.restaurantmanagement.domain.usescases;
 
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.*;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.*;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.*;
 import br.com.fiap.restaurantmanagement.domain.entities.Address;
@@ -22,9 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class SaveRestaurantAdapterTest {
+public class CreateRestaurantUseCaseTest {
 
-    private SaveRestaurantAdapter saveRestaurantAdapter;
+    private CreateRestaurantUseCase createRestaurantUseCase;
 
     @Mock
     private RestaurantRepository restaurantRepository;
@@ -46,14 +47,14 @@ class SaveRestaurantAdapterTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-
-        saveRestaurantAdapter = new SaveRestaurantAdapter(
+        SaveRestaurantAdapterPort saveRestaurantAdapterPort = new SaveRestaurantAdapter(
                 restaurantRepository,
                 new SaveFoodTypeAdapter(foodTypeRepository),
                 new SaveAddressAdapter(addressRepository),
                 new SaveTableAdapter(tableRepository),
                 new SaveOpeningHourAdapter(openingHourRepository)
         );
+        createRestaurantUseCase = new CreateRestaurantUseCase(saveRestaurantAdapterPort);
     }
 
     @AfterEach
@@ -74,7 +75,7 @@ class SaveRestaurantAdapterTest {
         when(restaurantRepository.save(any(RestaurantModel.class))).thenReturn(restaurantModel);
 
         // act
-        var restaurantSaved = saveRestaurantAdapter.saveRestaurant(restaurant);
+        var restaurantSaved = createRestaurantUseCase.execute(restaurant);
 
         // assert
         assertThat(restaurantSaved).isNotNull();
