@@ -1,10 +1,12 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "reservation")
@@ -34,4 +36,5 @@ public class ReservationModel {
     @OneToOne
     @JoinColumn(name = "restaraunt_table_id")
     private TableModel table;
+
 }

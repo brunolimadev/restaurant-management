@@ -2,13 +2,15 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
 import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "food_type")
