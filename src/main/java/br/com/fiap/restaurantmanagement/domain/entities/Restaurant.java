@@ -10,8 +10,6 @@ import java.util.Objects;
 public class Restaurant {
 
     private Long id;
-
-
     private String name;
     private List<Address> address;
     private TypesOfFood typeOfFood;
