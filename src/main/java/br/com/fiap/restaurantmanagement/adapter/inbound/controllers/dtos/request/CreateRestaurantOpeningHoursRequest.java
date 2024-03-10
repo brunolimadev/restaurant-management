@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateRestaurantOpeningHoursRequest {
 
-    public DaysOfWeek dayOfWeek;
+    private DaysOfWeek dayOfWeek;
 
-    public String openingTime;
+    private String openingTime;
 
-    public String closingTime;
+    private String closingTime;
 
     public OpeningHours toDomain() {
        return new OpeningHours(dayOfWeek, openingTime, closingTime);

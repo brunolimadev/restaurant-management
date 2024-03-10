@@ -2,19 +2,19 @@ package br.com.fiap.restaurantmanagement.domain.usecases;
 
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateRestaurantUseCasePort;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveRestaurantAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 
 public class CreateRestaurantUseCase implements CreateRestaurantUseCasePort {
 
-    private SaveRestaurantAdapterPort<Restaurant> saveRestaurantAdapterPort;
+    private SaveAdapterPort<Restaurant> saveAdapterPort;
 
-    public CreateRestaurantUseCase(SaveRestaurantAdapterPort saveRestaurantAdapterPort) {
-        this.saveRestaurantAdapterPort = saveRestaurantAdapterPort;
+    public CreateRestaurantUseCase(SaveAdapterPort saveAdapterPort) {
+        this.saveAdapterPort = saveAdapterPort;
     }
 
     @Override
     public Restaurant execute(Restaurant restaurant) {
-      var restaurantResult = this.saveRestaurantAdapterPort.saveRestaurant(restaurant);
+      var restaurantResult = this.saveAdapterPort.save(restaurant);
 
       return restaurantResult;
     }

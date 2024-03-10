@@ -3,14 +3,14 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.RestaurantRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.*;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveRestaurantAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
-public class SaveRestaurantAdapter implements SaveRestaurantAdapterPort<Restaurant> {
+public class SaveAdapter implements SaveAdapterPort<Restaurant> {
 
     private final RestaurantRepository restaurantRepository;
     private final SaveFoodTypeAdapter saveFoodTypeAdapter;
@@ -19,7 +19,7 @@ public class SaveRestaurantAdapter implements SaveRestaurantAdapterPort<Restaura
     private final SaveOpeningHourAdapter saveOpeningHourAdapter;
 
 
-    public SaveRestaurantAdapter(RestaurantRepository restaurantRepository, SaveFoodTypeAdapter saveFoodTypeAdapter, SaveAddressAdapter saveAddressAdapter, SaveTableAdapter saveTableAdapter, SaveOpeningHourAdapter saveOpeningHourAdapter) {
+    public SaveAdapter(RestaurantRepository restaurantRepository, SaveFoodTypeAdapter saveFoodTypeAdapter, SaveAddressAdapter saveAddressAdapter, SaveTableAdapter saveTableAdapter, SaveOpeningHourAdapter saveOpeningHourAdapter) {
         this.restaurantRepository = restaurantRepository;
         this.saveFoodTypeAdapter = saveFoodTypeAdapter;
         this.saveAddressAdapter = saveAddressAdapter;
@@ -29,7 +29,7 @@ public class SaveRestaurantAdapter implements SaveRestaurantAdapterPort<Restaura
 
     @Override
     @Transactional
-    public Restaurant saveRestaurant(Restaurant restaurant) {
+    public Restaurant save(Restaurant restaurant) {
 
         RestaurantModel restaurantModel = new RestaurantModel();
 

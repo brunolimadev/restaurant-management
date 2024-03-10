@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 class SaveRestaurantAdapterTest {
 
-    private SaveRestaurantAdapter saveRestaurantAdapter;
+    private SaveAdapter saveRestaurantAdapter;
 
     @Mock
     private RestaurantRepository restaurantRepository;
@@ -42,7 +42,7 @@ class SaveRestaurantAdapterTest {
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
 
-        saveRestaurantAdapter = new SaveRestaurantAdapter(
+        saveRestaurantAdapter = new SaveAdapter(
                 restaurantRepository,
                 new SaveFoodTypeAdapter(foodTypeRepository),
                 new SaveAddressAdapter(addressRepository),
@@ -69,7 +69,7 @@ class SaveRestaurantAdapterTest {
         when(restaurantRepository.save(any(RestaurantModel.class))).thenReturn(restaurantModel);
 
         // act
-        var restaurantSaved = saveRestaurantAdapter.saveRestaurant(restaurant);
+        var restaurantSaved = saveRestaurantAdapter.save(restaurant);
 
         // assert
         assertThat(restaurantSaved).isNotNull();

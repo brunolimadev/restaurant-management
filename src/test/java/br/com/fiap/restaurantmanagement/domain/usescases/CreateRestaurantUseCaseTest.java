@@ -9,7 +9,7 @@ import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.entities.Table;
 import br.com.fiap.restaurantmanagement.domain.enumerators.DaysOfWeek;
 import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveRestaurantAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import br.com.fiap.restaurantmanagement.domain.usecases.CreateRestaurantUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,14 +47,14 @@ public class CreateRestaurantUseCaseTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        SaveRestaurantAdapterPort saveRestaurantAdapterPort = new SaveRestaurantAdapter(
+        SaveAdapterPort saveAdapterPort = new SaveAdapter(
                 restaurantRepository,
                 new SaveFoodTypeAdapter(foodTypeRepository),
                 new SaveAddressAdapter(addressRepository),
                 new SaveTableAdapter(tableRepository),
                 new SaveOpeningHourAdapter(openingHourRepository)
         );
-        createRestaurantUseCase = new CreateRestaurantUseCase(saveRestaurantAdapterPort);
+        createRestaurantUseCase = new CreateRestaurantUseCase(saveAdapterPort);
     }
 
     @AfterEach

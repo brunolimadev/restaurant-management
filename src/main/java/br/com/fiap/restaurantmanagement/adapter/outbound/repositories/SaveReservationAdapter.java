@@ -1,14 +1,15 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveReservationAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SaveReservationAdapter implements SaveReservationAdapterPort<Reservation> {
+public class SaveReservationAdapter implements SaveAdapterPort<Reservation> {
 
     @Override
-    public Reservation saveReservation(Reservation reservation) {
+    public Reservation save(Reservation entity) {
         return null;
     }
+
 }

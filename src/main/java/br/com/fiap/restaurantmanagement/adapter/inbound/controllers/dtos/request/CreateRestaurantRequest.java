@@ -15,15 +15,15 @@ import java.util.List;
 @Builder
 public class CreateRestaurantRequest {
 
-    public String name;
+    private String name;
 
-    public String foodType;
+    private String foodType;
 
-    public List<CreateRestaurantAddressRequest> address;
+    private List<CreateRestaurantAddressRequest> address;
 
-    public List<CreateRestaurantTableRequest> tables;
+    private List<CreateRestaurantTableRequest> tables;
 
-    public List<CreateRestaurantOpeningHoursRequest> openingHours;
+    private List<CreateRestaurantOpeningHoursRequest> openingHours;
 
     public Restaurant toDomain() {
         return new Restaurant(
