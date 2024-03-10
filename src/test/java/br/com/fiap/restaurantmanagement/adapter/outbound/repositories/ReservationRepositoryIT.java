@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -38,12 +37,24 @@ class ReservationRepositoryIT {
 
     @Test
     void devePermitirRemoverReserva() {
-        fail("teste não implementado");
+        //Arrange
+        var id = 1L;
+
+        //Act
+        reservationRepository.deleteById(id);
+        var reservationReceiveOptional = reservationRepository.findById(id);
+
+        //Assert
+        assertThat(reservationReceiveOptional).isEmpty();
     }
 
     @Test
     void devePermitirListarReserva() {
-        fail("teste não implementado");
+        //Act
+        var reservationResults = reservationRepository.findAll();
+
+        //Assert
+        assertThat(reservationResults).hasSizeGreaterThan(0);
     }
 
     private ReservationModel gerarReserva() {
@@ -51,19 +62,29 @@ class ReservationRepositoryIT {
                 .date(LocalDateTime.now().toString())
                 .time(LocalTime.now().toString())
                 .numberOfpeople(2)
+                .restaurant(RestaurantModel.builder()
+                        .id(1L)
+                        .name("Meu restaurante")
+                        .foodType(FoodTypeModel.builder()
+                                .id(1L)
+                                .name(TypesOfFood.BRAZILIAN)
+                                .createdAt(LocalDateTime.now())
+                                .build())
+                        .build())
                 .user(UserModel.builder()
                         .id(1L)
                         .name("Januário")
                         .email("januario@hotmail.com")
                         .build())
                 .table(TableModel.builder()
-                        .id(1L)
+                        .id(2L)
                         .description("Mesa para 4 pessoas")
                         .numberOfSeats(4)
                         .restaurant(RestaurantModel.builder()
                                 .id(1L)
                                 .name("Meu restaurante")
                                 .foodType(FoodTypeModel.builder()
+                                        .id(1L)
                                         .name(TypesOfFood.BRAZILIAN)
                                         .createdAt(LocalDateTime.now())
                                         .build())

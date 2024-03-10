@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/restaurant")
 public class RestaurantController {
 
-    private CreateRestaurantUseCasePort createRestaurantUseCasePort;
+    private final CreateRestaurantUseCasePort createRestaurantUseCasePort;
 
     public RestaurantController(CreateRestaurantUseCasePort createRestaurantUseCasePort) {
         this.createRestaurantUseCasePort = createRestaurantUseCasePort;

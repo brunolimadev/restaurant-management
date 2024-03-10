@@ -5,16 +5,14 @@ import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUs
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 
 public class CreateReservationUseCase implements CreateReservationUseCasePort {
-    private SaveAdapterPort<Reservation> saveAdapterPort;
+    private final SaveAdapterPort<Reservation> reservationSaveAdapterPort;
 
-    public CreateReservationUseCase(SaveAdapterPort saveAdapterPort) {
-        this.saveAdapterPort = saveAdapterPort;
+    public CreateReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort) {
+        this.reservationSaveAdapterPort = reservationSaveAdapterPort;
     }
 
     @Override
     public Reservation execute(Reservation reservation) {
-        var reservationResult = this.saveAdapterPort.save(reservation);
-
-        return reservationResult;
+        return  this.reservationSaveAdapterPort.save(reservation);
     }
 }

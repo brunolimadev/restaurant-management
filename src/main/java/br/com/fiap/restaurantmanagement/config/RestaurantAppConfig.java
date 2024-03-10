@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 public class RestaurantAppConfig {
 
     @Bean
-    public CreateRestaurantUseCasePort createRestaurantUseCase(SaveAdapterPort<Restaurant> saveRestaurant) {
-        return new CreateRestaurantUseCase(saveRestaurant);
+    public CreateRestaurantUseCasePort createRestaurantUseCase(SaveAdapterPort<Restaurant> restaurantSaveAdapterPort) {
+        return new CreateRestaurantUseCase(restaurantSaveAdapterPort);
     }
 
     @Bean
-    public CreateReservationUseCasePort createReservationUseCase(SaveAdapterPort<Reservation> saveReservation) {
-        return new CreateReservationUseCase(saveReservation);
+    public CreateReservationUseCasePort createReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort) {
+        return new CreateReservationUseCase(reservationSaveAdapterPort);
     }
 
 }

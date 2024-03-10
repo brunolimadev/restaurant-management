@@ -6,17 +6,15 @@ import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 
 public class CreateRestaurantUseCase implements CreateRestaurantUseCasePort {
 
-    private SaveAdapterPort<Restaurant> saveAdapterPort;
+    private final SaveAdapterPort<Restaurant> restaurantSaveAdapterPort;
 
-    public CreateRestaurantUseCase(SaveAdapterPort saveAdapterPort) {
-        this.saveAdapterPort = saveAdapterPort;
+    public CreateRestaurantUseCase(SaveAdapterPort<Restaurant> restaurantSaveAdapterPort) {
+        this.restaurantSaveAdapterPort = restaurantSaveAdapterPort;
     }
 
     @Override
     public Restaurant execute(Restaurant restaurant) {
-      var restaurantResult = this.saveAdapterPort.save(restaurant);
-
-      return restaurantResult;
+      return this.restaurantSaveAdapterPort.save(restaurant);
     }
 
 }
