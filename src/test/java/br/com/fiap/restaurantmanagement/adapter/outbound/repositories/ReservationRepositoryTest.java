@@ -11,9 +11,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -50,40 +50,54 @@ class ReservationRepositoryTest {
     }
 
     @Test
-    void devePermitirAlterarReserva() {
-        fail("teste não implementado");
-    }
-
-    @Test
     void devePermitirRemoverReserva() {
-        fail("teste não implementado");
+        //Arrange
+        var id = 1L;
+        doNothing().when(reservationRepository).deleteById(anyLong());
+
+        //Act
+        reservationRepository.deleteById(id);
+
+        //Assert
+        verify(reservationRepository, times(1)).deleteById(anyLong());
     }
 
     @Test
     void devePermitirListarReserva() {
-        fail("teste não implementado");
+        //Arrange
+        var reservationOne = gerarReserva();
+        var reservationTwo = gerarReserva();
+        var reservationThree = gerarReserva();
+        var reservationList = Arrays.asList(reservationOne, reservationTwo, reservationThree);
+
+        when(reservationRepository.findAll()).thenReturn(reservationList);
+
+        //Act
+        var receiveReservationList = reservationRepository.findAll();
+
+        //Assert
+        assertThat(receiveReservationList)
+                .isNotEmpty()
+                .hasSize(3)
+                .containsExactlyInAnyOrder(reservationOne, reservationTwo, reservationThree);
+        verify(reservationRepository, times(1)).findAll();
     }
 
     private ReservationModel gerarReserva() {
         return ReservationModel.builder()
-                .id(1L)
                 .date(LocalDateTime.now().toString())
                 .time(LocalTime.now().toString())
                 .numberOfpeople(2)
                 .user(UserModel.builder()
-                        .id(1L)
                         .name("Januário")
                         .email("januario@hotmail.com")
                         .build())
                 .table(TableModel.builder()
-                        .id(1L)
                         .description("Mesa para 4 pessoas")
                         .numberOfSeats(4)
                         .restaurant(RestaurantModel.builder()
-                                .id(1L)
                                 .name("Meu restaurante")
                                 .foodType(FoodTypeModel.builder()
-                                        .id(1L)
                                         .name(TypesOfFood.BRAZILIAN)
                                         .createdAt(LocalDateTime.now())
                                         .build())
