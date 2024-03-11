@@ -12,21 +12,21 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateRestaurantAddressRequest {
 
-    public String street;
+    private String street;
 
-    public String number;
+    private String number;
 
-    public String complement;
+    private String complement;
 
-    public String neighborhood;
+    private String neighborhood;
 
-    public String city;
+    private String city;
 
-    public String state;
+    private String state;
 
-    public String zipCode;
+    private String zipCode;
 
-    public String country;
+    private String country;
 
     public Address toDomain() {
         return new Address(

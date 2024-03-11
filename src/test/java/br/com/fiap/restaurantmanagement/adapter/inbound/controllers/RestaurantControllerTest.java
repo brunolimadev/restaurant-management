@@ -33,7 +33,7 @@ public class RestaurantControllerTest {
     @Test
     public void shouldPermitCreateRestaurant() throws Exception {
         var restaurant = RestaurantHelper.createRestaurant();
-        Mockito.when(createRestaurantUseCasePort.execute(any(Restaurant.class))).thenAnswer(i -> i.getArgument(0));
+        Mockito.when(createRestaurantUseCasePort.execute(any(Restaurant.class))).thenReturn(restaurant);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/restaurant")
                 .contentType(MediaType.APPLICATION_JSON)

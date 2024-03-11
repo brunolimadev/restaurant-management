@@ -2,8 +2,7 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -11,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Entity
 @Table(name = "restaurant_table")

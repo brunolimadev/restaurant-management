@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateRestaurantTableRequest {
 
-    public String description;
+    private String description;
 
-    public Integer numberOfSeats;
+    private Integer numberOfSeats;
 
     public Table toDomain() {
 

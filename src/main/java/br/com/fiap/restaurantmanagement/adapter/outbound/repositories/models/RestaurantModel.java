@@ -2,12 +2,18 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "restaurant")
 public class RestaurantModel {

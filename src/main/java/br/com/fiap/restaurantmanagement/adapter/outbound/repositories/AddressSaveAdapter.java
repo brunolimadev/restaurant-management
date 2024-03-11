@@ -2,23 +2,22 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.AddressRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.AddressModel;
-import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class SaveAddressAdapter {
+public class AddressSaveAdapter implements SaveAdapterPort<List<AddressModel>> {
+
     private final AddressRepository addressRepository;
 
-    public SaveAddressAdapter(AddressRepository addressRepository) {
+    public AddressSaveAdapter(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 
-    public List<AddressModel> save(Restaurant restaurant) {
-
-        List<AddressModel> addressModels = AddressModel.fromDomain(restaurant);
-
-        return addressRepository.saveAll(addressModels);
+    @Override
+    public List<AddressModel> save(List<AddressModel> entity) {
+        return addressRepository.saveAll(entity);
     }
 }

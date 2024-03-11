@@ -3,53 +3,53 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.RestaurantRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.*;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveRestaurantAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
-public class SaveRestaurantAdapter implements SaveRestaurantAdapterPort<Restaurant> {
+public class RestaurantSaveAdapter implements SaveAdapterPort<Restaurant> {
 
     private final RestaurantRepository restaurantRepository;
-    private final SaveFoodTypeAdapter saveFoodTypeAdapter;
-    private final SaveAddressAdapter saveAddressAdapter;
-    private final SaveTableAdapter saveTableAdapter;
-    private final SaveOpeningHourAdapter saveOpeningHourAdapter;
+    private final FoodTypeSaveAdapter foodTypeSaveAdapter;
+    private final AddressSaveAdapter addressSaveAdapter;
+    private final TableSaveAdapter tableSaveAdapter;
+    private final OpeningHourSaveAdapter openingHourSaveAdapter;
 
 
-    public SaveRestaurantAdapter(RestaurantRepository restaurantRepository, SaveFoodTypeAdapter saveFoodTypeAdapter, SaveAddressAdapter saveAddressAdapter, SaveTableAdapter saveTableAdapter, SaveOpeningHourAdapter saveOpeningHourAdapter) {
+    public RestaurantSaveAdapter(RestaurantRepository restaurantRepository, FoodTypeSaveAdapter foodTypeSaveAdapter, AddressSaveAdapter addressSaveAdapter, TableSaveAdapter tableSaveAdapter, OpeningHourSaveAdapter openingHourSaveAdapter) {
         this.restaurantRepository = restaurantRepository;
-        this.saveFoodTypeAdapter = saveFoodTypeAdapter;
-        this.saveAddressAdapter = saveAddressAdapter;
-        this.saveTableAdapter = saveTableAdapter;
-        this.saveOpeningHourAdapter = saveOpeningHourAdapter;
+        this.foodTypeSaveAdapter = foodTypeSaveAdapter;
+        this.addressSaveAdapter = addressSaveAdapter;
+        this.tableSaveAdapter = tableSaveAdapter;
+        this.openingHourSaveAdapter = openingHourSaveAdapter;
     }
 
     @Override
     @Transactional
-    public Restaurant saveRestaurant(Restaurant restaurant) {
+    public Restaurant save(Restaurant restaurant) {
 
         RestaurantModel restaurantModel = new RestaurantModel();
 
         try{
-            FoodTypeModel foodTypeModel = saveFoodTypeAdapter.save(restaurant.getTypeOfFood());
+            FoodTypeModel foodTypeModel = foodTypeSaveAdapter.save(FoodTypeModel.fromDomain(restaurant.getTypeOfFood(), null));
             restaurantModel.setFoodType(foodTypeModel);
 
-            List<AddressModel> addressModels = saveAddressAdapter.save(restaurant);
+            List<AddressModel> addressModels = addressSaveAdapter.save(AddressModel.fromDomain(restaurant));
 
             for (AddressModel addressModel : addressModels) {
                 addressModel.setRestaurant(restaurantModel);
             }
 
-            List<TableModel> tableModels = saveTableAdapter.save(restaurant);
+            List<TableModel> tableModels = tableSaveAdapter.save(TableModel.fromDomain(restaurant));
 
             for (TableModel tableModel : tableModels) {
                 tableModel.setRestaurant(restaurantModel);
             }
 
-            List<OpeningHourModel> openingHourModels = saveOpeningHourAdapter.save(restaurant);
+            List<OpeningHourModel> openingHourModels = openingHourSaveAdapter.save(OpeningHourModel.fromDomain(restaurant));
 
             for (OpeningHourModel openingHourModel : openingHourModels) {
                 openingHourModel.setRestaurant(restaurantModel);
