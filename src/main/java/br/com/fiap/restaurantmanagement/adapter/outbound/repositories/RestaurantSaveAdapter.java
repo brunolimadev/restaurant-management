@@ -10,21 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-public class SaveAdapter implements SaveAdapterPort<Restaurant> {
+public class RestaurantSaveAdapter implements SaveAdapterPort<Restaurant> {
 
     private final RestaurantRepository restaurantRepository;
-    private final SaveFoodTypeAdapter saveFoodTypeAdapter;
-    private final SaveAddressAdapter saveAddressAdapter;
-    private final SaveTableAdapter saveTableAdapter;
-    private final SaveOpeningHourAdapter saveOpeningHourAdapter;
+    private final FoodTypeSaveAdapter foodTypeSaveAdapter;
+    private final AddressSaveAdapter addressSaveAdapter;
+    private final TableSaveAdapter tableSaveAdapter;
+    private final OpeningHourSaveAdapter openingHourSaveAdapter;
 
 
-    public SaveAdapter(RestaurantRepository restaurantRepository, SaveFoodTypeAdapter saveFoodTypeAdapter, SaveAddressAdapter saveAddressAdapter, SaveTableAdapter saveTableAdapter, SaveOpeningHourAdapter saveOpeningHourAdapter) {
+    public RestaurantSaveAdapter(RestaurantRepository restaurantRepository, FoodTypeSaveAdapter foodTypeSaveAdapter, AddressSaveAdapter addressSaveAdapter, TableSaveAdapter tableSaveAdapter, OpeningHourSaveAdapter openingHourSaveAdapter) {
         this.restaurantRepository = restaurantRepository;
-        this.saveFoodTypeAdapter = saveFoodTypeAdapter;
-        this.saveAddressAdapter = saveAddressAdapter;
-        this.saveTableAdapter = saveTableAdapter;
-        this.saveOpeningHourAdapter = saveOpeningHourAdapter;
+        this.foodTypeSaveAdapter = foodTypeSaveAdapter;
+        this.addressSaveAdapter = addressSaveAdapter;
+        this.tableSaveAdapter = tableSaveAdapter;
+        this.openingHourSaveAdapter = openingHourSaveAdapter;
     }
 
     @Override
@@ -34,22 +34,22 @@ public class SaveAdapter implements SaveAdapterPort<Restaurant> {
         RestaurantModel restaurantModel = new RestaurantModel();
 
         try{
-            FoodTypeModel foodTypeModel = saveFoodTypeAdapter.save(restaurant.getTypeOfFood());
+            FoodTypeModel foodTypeModel = foodTypeSaveAdapter.save(FoodTypeModel.fromDomain(restaurant.getTypeOfFood(), null));
             restaurantModel.setFoodType(foodTypeModel);
 
-            List<AddressModel> addressModels = saveAddressAdapter.save(restaurant);
+            List<AddressModel> addressModels = addressSaveAdapter.save(AddressModel.fromDomain(restaurant));
 
             for (AddressModel addressModel : addressModels) {
                 addressModel.setRestaurant(restaurantModel);
             }
 
-            List<TableModel> tableModels = saveTableAdapter.save(restaurant);
+            List<TableModel> tableModels = tableSaveAdapter.save(TableModel.fromDomain(restaurant));
 
             for (TableModel tableModel : tableModels) {
                 tableModel.setRestaurant(restaurantModel);
             }
 
-            List<OpeningHourModel> openingHourModels = saveOpeningHourAdapter.save(restaurant);
+            List<OpeningHourModel> openingHourModels = openingHourSaveAdapter.save(OpeningHourModel.fromDomain(restaurant));
 
             for (OpeningHourModel openingHourModel : openingHourModels) {
                 openingHourModel.setRestaurant(restaurantModel);

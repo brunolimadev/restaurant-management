@@ -2,27 +2,23 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.TableRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.TableModel;
-import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
-import br.com.fiap.restaurantmanagement.domain.entities.Table;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class SaveTableAdapter {
+public class TableSaveAdapter implements SaveAdapterPort<List<TableModel>> {
 
     private final TableRepository tableRepository;
 
-    public SaveTableAdapter(TableRepository tableRepository) {
+    public TableSaveAdapter(TableRepository tableRepository) {
         this.tableRepository = tableRepository;
     }
 
-    public List<TableModel> save(Restaurant restaurant) {
-
-        List<TableModel> tableModels = TableModel.fromDomain(restaurant);
-
-        return tableRepository.saveAll(tableModels);
+    @Override
+    public List<TableModel> save(List<TableModel> entity) {
+        return tableRepository.saveAll(entity);
     }
 
 }

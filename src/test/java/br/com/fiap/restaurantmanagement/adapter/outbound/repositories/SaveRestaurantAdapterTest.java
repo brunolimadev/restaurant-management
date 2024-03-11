@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 class SaveRestaurantAdapterTest {
 
-    private SaveAdapter saveRestaurantAdapter;
+    private RestaurantSaveAdapter saveRestaurantAdapter;
 
     @Mock
     private RestaurantRepository restaurantRepository;
@@ -42,12 +42,12 @@ class SaveRestaurantAdapterTest {
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
 
-        saveRestaurantAdapter = new SaveAdapter(
+        saveRestaurantAdapter = new RestaurantSaveAdapter(
                 restaurantRepository,
-                new SaveFoodTypeAdapter(foodTypeRepository),
-                new SaveAddressAdapter(addressRepository),
-                new SaveTableAdapter(tableRepository),
-                new SaveOpeningHourAdapter(openingHourRepository)
+                new FoodTypeSaveAdapter(foodTypeRepository),
+                new AddressSaveAdapter(addressRepository),
+                new TableSaveAdapter(tableRepository),
+                new OpeningHourSaveAdapter(openingHourRepository)
         );
     }
 

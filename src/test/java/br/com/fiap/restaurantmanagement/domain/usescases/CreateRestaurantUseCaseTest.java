@@ -47,12 +47,12 @@ public class CreateRestaurantUseCaseTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        SaveAdapterPort saveAdapterPort = new SaveAdapter(
+        SaveAdapterPort saveAdapterPort = new RestaurantSaveAdapter(
                 restaurantRepository,
-                new SaveFoodTypeAdapter(foodTypeRepository),
-                new SaveAddressAdapter(addressRepository),
-                new SaveTableAdapter(tableRepository),
-                new SaveOpeningHourAdapter(openingHourRepository)
+                new FoodTypeSaveAdapter(foodTypeRepository),
+                new AddressSaveAdapter(addressRepository),
+                new TableSaveAdapter(tableRepository),
+                new OpeningHourSaveAdapter(openingHourRepository)
         );
         createRestaurantUseCase = new CreateRestaurantUseCase(saveAdapterPort);
     }
