@@ -1,1 +1,1 @@
-web: java -jar target/restaurant-management.jar
+web: java -jar target/restaurant-management-1.0.0.jar
