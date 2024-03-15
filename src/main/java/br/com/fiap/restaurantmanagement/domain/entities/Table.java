@@ -1,5 +1,8 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
+/**
+ * This class represents a table
+ */
 public class Table {
 
     private String description;

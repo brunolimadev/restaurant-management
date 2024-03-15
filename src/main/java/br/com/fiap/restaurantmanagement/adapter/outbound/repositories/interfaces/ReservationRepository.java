@@ -4,5 +4,8 @@ import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.Res
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * This interface represents the reservation repository
+ */
 @Repository
 public interface ReservationRepository extends JpaRepository<ReservationModel, Long> { }

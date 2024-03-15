@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents the create reservation response
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

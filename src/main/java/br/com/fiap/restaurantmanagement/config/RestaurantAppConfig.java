@@ -10,7 +10,9 @@ import br.com.fiap.restaurantmanagement.domain.usecases.CreateRestaurantUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+/**
+ * This class represents the application configuration
+ */
 @Configuration
 public class RestaurantAppConfig {
 

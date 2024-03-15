@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * This class represents the address save adapter
+ */
 @Component
 public class AddressSaveAdapter implements SaveAdapterPort<List<AddressModel>> {
 

@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * This class represents the like model
+ */
 @Data
 @Embeddable
 public class LikeModel implements Serializable {

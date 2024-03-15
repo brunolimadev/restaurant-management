@@ -1,5 +1,6 @@
 package br.com.fiap.restaurantmanagement.adapter.inbound.controllers;
 
+import br.com.fiap.restaurantmanagement.utils.RestaurantHelper;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -34,48 +35,7 @@ public class RestaurantControllerIT {
         void shouldRegisterRestaurant(){
             given()
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body("{\n" +
-                            "    \"name\": \"Dona Chica\",\n" +
-                            "    \"foodType\": \"BRAZILIAN\",\n" +
-                            "    \"address\": [{\n" +
-                            "        \"street\": \"Av. Paulista\",\n" +
-                            "        \"number\": \"1010\",\n" +
-                            "        \"complement\": \"\",\n" +
-                            "        \"neighborhood\": \"centro\",\n" +
-                            "        \"city\": \"São Paulo\",\n" +
-                            "        \"state\": \"SP\",\n" +
-                            "        \"zipCode\": \"10001-005\",\n" +
-                            "        \"country\": \"Brazil\"\n" +
-                            "    }],\n" +
-                            "    \"tables\": [\n" +
-                            "        {\n" +
-                            "            \"description\": \"1\",\n" +
-                            "            \"numberOfSeats\": 10\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"description\": \"2\",\n" +
-                            "            \"numberOfSeats\": 4\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"description\": \"3\",\n" +
-                            "            \"numberOfSeats\": 6\n" +
-                            "        }\n" +
-                            "    ],\n" +
-                            "    \"openingHours\": [\n" +
-                            "        {\n" +
-                            "            \"dayOfWeek\": \"SATURDAY\",\n" +
-                            "            \"openingTime\": \"10:00\",\n" +
-                            "            \"closingTime\": \"22:00\"\n" +
-                            "\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"dayOfWeek\": \"SUNDAY\",\n" +
-                            "            \"openingTime\": \"10:00\",\n" +
-                            "            \"closingTime\": \"22:00\"\n" +
-                            "        }\n" +
-                            "    ]\n" +
-                            "    \n" +
-                            "}")
+                    .body(RestaurantHelper.createRestaurantRequestJson())
             .when()
                     .post("/restaurant-management/api/restaurant")
             .then()

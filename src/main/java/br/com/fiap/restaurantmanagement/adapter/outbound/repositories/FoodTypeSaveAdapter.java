@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * This class represents the food type save adapter
+ */
 @Component
 public class FoodTypeSaveAdapter implements SaveAdapterPort<FoodTypeModel> {
 

@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class represents a restaurant
+ */
 public class Restaurant {
 
     private Long id;

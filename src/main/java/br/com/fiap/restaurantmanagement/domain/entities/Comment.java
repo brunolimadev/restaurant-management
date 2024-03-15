@@ -1,5 +1,8 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
+/**
+ * This class represents a comment
+ */
 public class Comment {
     private String userName;
     private String comment;

@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the opening hour model
+ */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
