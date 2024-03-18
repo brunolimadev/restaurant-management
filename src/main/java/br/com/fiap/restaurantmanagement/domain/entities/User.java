@@ -2,6 +2,9 @@ package br.com.fiap.restaurantmanagement.domain.entities;
 
 import br.com.fiap.restaurantmanagement.domain.enumerators.AccessRole;
 
+/**
+ * This class represents a user
+ */
 public class User {
 
     private String name;

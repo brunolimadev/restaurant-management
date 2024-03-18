@@ -3,6 +3,9 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * This class represents the user model
+ */
 @Data
 @Builder
 @NoArgsConstructor

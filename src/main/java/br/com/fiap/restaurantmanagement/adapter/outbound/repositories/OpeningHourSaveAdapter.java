@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * This class represents the opening hour save adapter
+ */
 @Component
 public class OpeningHourSaveAdapter implements SaveAdapterPort<List<OpeningHourModel>> {
 

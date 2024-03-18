@@ -4,6 +4,9 @@ import br.com.fiap.restaurantmanagement.domain.enumerators.DaysOfWeek;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represents the opening hours of a restaurant
+ */
 public class OpeningHours {
     private DaysOfWeek dayOfWeek;
     private String openingTime;

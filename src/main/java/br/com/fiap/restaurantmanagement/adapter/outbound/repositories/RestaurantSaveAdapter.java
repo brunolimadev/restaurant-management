@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * This class represents the restaurant save adapter
+ */
 @Component
 public class RestaurantSaveAdapter implements SaveAdapterPort<Restaurant> {
 

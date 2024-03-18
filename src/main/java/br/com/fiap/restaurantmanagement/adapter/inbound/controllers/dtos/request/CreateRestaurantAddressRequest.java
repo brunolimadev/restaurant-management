@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents the create restaurant address request
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

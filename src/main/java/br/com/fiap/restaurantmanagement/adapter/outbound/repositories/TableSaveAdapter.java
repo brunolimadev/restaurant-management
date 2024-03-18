@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * This class represents the table save adapter
+ */
 @Component
 public class TableSaveAdapter implements SaveAdapterPort<List<TableModel>> {
 

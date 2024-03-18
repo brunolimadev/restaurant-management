@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * This interface represents the address repository
+ */
 @Repository
 public interface AddressRepository extends JpaRepository<AddressModel, Long> {
 

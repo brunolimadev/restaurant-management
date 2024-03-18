@@ -7,6 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represents the food type model
+ */
 @Data
 @Builder
 @NoArgsConstructor

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class represents the reservation controller
+ */
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {

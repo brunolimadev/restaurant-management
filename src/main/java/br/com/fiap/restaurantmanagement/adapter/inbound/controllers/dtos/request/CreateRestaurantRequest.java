@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * This class represents the create restaurant request
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

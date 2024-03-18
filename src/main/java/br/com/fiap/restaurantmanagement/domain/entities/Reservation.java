@@ -3,6 +3,9 @@ package br.com.fiap.restaurantmanagement.domain.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * This class represents a reservation
+ */
 public class Reservation {
     private Long id;
     private Long restaurantId;

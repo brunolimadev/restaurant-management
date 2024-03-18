@@ -1,5 +1,8 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
+/**
+ * This class represents the address of a restaurant
+ */
 public class Address {
 
     private String street;

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * This interface represents the food type repository
+ */
 @Repository
 public interface FoodTypeRepository extends JpaRepository<FoodTypeModel, Long> {
 

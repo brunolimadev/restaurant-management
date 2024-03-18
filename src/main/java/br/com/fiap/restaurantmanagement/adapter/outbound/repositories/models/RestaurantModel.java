@@ -10,6 +10,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represents the restaurant model
+ */
 @Data
 @Builder
 @NoArgsConstructor
