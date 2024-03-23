@@ -63,6 +63,7 @@ public class RestaurantHelper {
         address.setState("Estado 1");
         address.setCountry("Pais 1");
         address.setZipCode("CEP 1");
+        address.setRestaurant(createRestaurantModel());
 
         return address;
     }
