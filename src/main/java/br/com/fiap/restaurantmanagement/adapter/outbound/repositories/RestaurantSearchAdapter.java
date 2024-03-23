@@ -21,11 +21,9 @@ public class RestaurantSearchAdapter implements SearchAdapterPort<List<Restauran
 
     private final EntityManager entityManager;
 
-    private final AddressRepository addressRepository;
 
-    public RestaurantSearchAdapter(EntityManager entityManager, AddressRepository addressRepository) {
+    public RestaurantSearchAdapter(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.addressRepository = addressRepository;
     }
 
     @Override

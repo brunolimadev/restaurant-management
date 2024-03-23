@@ -1,6 +1,5 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.AddressRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.AddressModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.FoodTypeModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
@@ -15,23 +14,18 @@ import jakarta.persistence.criteria.Root;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
 public class RestaurantSearchAdapterTest {
 
     private RestaurantSearchAdapter restaurantSearchAdapter;
-
-    @Mock
-    private AddressRepository addressRepository;
 
     @Mock
     private EntityManager entityManager;
@@ -62,8 +56,7 @@ public class RestaurantSearchAdapterTest {
         openMocks = MockitoAnnotations.openMocks(this);
 
         restaurantSearchAdapter = new RestaurantSearchAdapter(
-                entityManager,
-                addressRepository
+                entityManager
         );
 
     }
