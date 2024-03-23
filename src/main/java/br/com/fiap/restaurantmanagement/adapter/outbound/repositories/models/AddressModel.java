@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,8 +77,9 @@ public class AddressModel {
         return addressModels;
     }
 
-    public Address toDomain() {
-        return new Address(this.street, this.number, this.complement, this.neighborhood, this.city, this.state, this.zipCode, this.country);
+    public Restaurant toDomain() {
+        return new Restaurant(this.restaurant.getId(), this.restaurant.getName(), Arrays.asList(new Address(this.street, this.number, this.complement, this.neighborhood, this.city, this.state, this.zipCode, this.country)), this.restaurant.getFoodType().toDomain(), new ArrayList<>(), new ArrayList<>(), 0, new ArrayList<>());
     }
+
 
 }

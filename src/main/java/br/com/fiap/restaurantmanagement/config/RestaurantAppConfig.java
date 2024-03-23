@@ -4,11 +4,16 @@ import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateRestaurantUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.ports.inbound.SearchRestaurantUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.SearchAdapterPort;
 import br.com.fiap.restaurantmanagement.domain.usecases.CreateReservationUseCase;
 import br.com.fiap.restaurantmanagement.domain.usecases.CreateRestaurantUseCase;
+import br.com.fiap.restaurantmanagement.domain.usecases.SearchRestaurantUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * This class represents the application configuration
@@ -24,6 +29,11 @@ public class RestaurantAppConfig {
     @Bean
     public CreateReservationUseCasePort createReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort) {
         return new CreateReservationUseCase(reservationSaveAdapterPort);
+    }
+
+    @Bean
+    public SearchRestaurantUseCasePort searchRestaurantUseCase(SearchAdapterPort<List<Restaurant>> searchRestaurantUseCasePort) {
+        return new SearchRestaurantUseCase(searchRestaurantUseCasePort);
     }
 
 }
