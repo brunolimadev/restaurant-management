@@ -1,5 +1,8 @@
 package br.com.fiap.restaurantmanagement.config;
 
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.RestaurantRepository;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.TableRepository;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
@@ -22,8 +25,13 @@ public class RestaurantAppConfig {
     }
 
     @Bean
-    public CreateReservationUseCasePort createReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort) {
-        return new CreateReservationUseCase(reservationSaveAdapterPort);
+    public CreateReservationUseCasePort createReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort,
+                                                                 RestaurantRepository restaurantRepository,
+                                                                 ReservationRepository reservationRepository,
+                                                                 TableRepository tableRepository) {
+
+        return new CreateReservationUseCase(reservationSaveAdapterPort, restaurantRepository, reservationRepository, tableRepository);
+
     }
 
 }

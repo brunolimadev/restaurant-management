@@ -25,4 +25,7 @@ public class UserModel {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
 }

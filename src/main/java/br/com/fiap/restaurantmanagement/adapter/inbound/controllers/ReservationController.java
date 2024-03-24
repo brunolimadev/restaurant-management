@@ -28,12 +28,11 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<CreateReservationResponse> createRestaurant(@RequestBody CreateReservationRequest createReservationRequest) {
 
-        Reservation reservation = createReservationUseCasePort.execute(createReservationRequest.toDomain());
-
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                CreateReservationResponse.builder()
-                        .id(reservation.getId())
-                        .build()
-        );
+                CreateReservationResponse
+                        .builder()
+                        .reservation(createReservationUseCasePort.execute(createReservationRequest.toDomain()))
+                        .message("Reserva realizada com sucesso")
+                        .build());
     }
 }

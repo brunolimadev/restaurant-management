@@ -5,6 +5,7 @@ package br.com.fiap.restaurantmanagement.domain.entities;
  */
 public class Table {
 
+    private Long id;
     private String description;
     private int capacity;
 
@@ -18,6 +19,32 @@ public class Table {
 
         this.description = description;
         this.capacity = capacity;
+    }
+
+    public Table(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity cannot be less than or equal to zero");
+        }
+        if (capacity > 4) {
+            throw new IllegalArgumentException("a capacidade máxima de lugares por mesa é de 4");
+        }
+
+        this.capacity = capacity;
+    }
+
+    public Table(Long id, int capacity) {
+        if (capacity <= 0 || id == null) {
+            throw new IllegalArgumentException("a capacidade e o id da mesa devem ser informados");
+        }
+        if (capacity > 4) {
+            throw new IllegalArgumentException("a capacidade máxima de lugares por mesa é de 4");
+        }
+
+        this.capacity = capacity;
+    }
+
+    public Long getId() {
+        return  id;
     }
 
     public String getDescription() {

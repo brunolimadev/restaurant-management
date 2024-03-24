@@ -1,5 +1,6 @@
 package br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.response;
 
+import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CreateReservationResponse {
-    public Long id;
+    private Reservation reservation;
+    private String message;
 }
