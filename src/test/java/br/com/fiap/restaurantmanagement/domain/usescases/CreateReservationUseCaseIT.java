@@ -1,6 +1,7 @@
 package br.com.fiap.restaurantmanagement.domain.usescases;
 
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request.CreateReservationRequest;
+import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.usecases.CreateReservationUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,42 +40,50 @@ class CreateReservationUseCaseIT {
 
     @Test
     void deveGerarExcecaoAoTentarCriarReserva() {
-        CreateReservationRequest reservationRequest = CreateReservationRequest
-                .builder()
-                .name("Zeca")
-                .email("zeca@gmail.com")
-                .phoneNumber("11958974563")
-                .restaurantId(1L)
-                .places(1)
-                .date(LocalDate.parse("2021-10-10"))
-                .time(LocalTime.parse("12:00:37.942483700"))
-                .build();
+        //Arrange
+        var reservationRequest1 = gerarReserva("2021-10-10", "12:00");
+        var reservationRequest2 = gerarReserva("2021-10-10", "12:00");
+        var reservationRequest3 = gerarReserva("2021-10-10", "12:00");
+        var reservationRequest4 = gerarReserva("2021-10-10", "12:00");
+        var reservationRequest5 = gerarReserva("2021-10-10", "12:00");
 
-        assertThatThrownBy(() -> createReservationUseCase.execute(reservationRequest.toDomain()))
+        createReservationUseCase.execute(reservationRequest1);
+        createReservationUseCase.execute(reservationRequest2);
+        createReservationUseCase.execute(reservationRequest3);
+        createReservationUseCase.execute(reservationRequest4);
+
+        //Act & Assert
+        assertThatThrownBy(() -> createReservationUseCase.execute(reservationRequest5))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Já existe reserva neste restaurante");
+                .hasMessage("Todas as mesas estão ocupadas no restaurante para a data e horário selecionados");
     }
 
     @Test
     void deveCriarReserva() {
-        CreateReservationRequest reservationRequest = CreateReservationRequest
+        //Arrange
+        var reservationRequest = gerarReserva("2022-10-10", "12:00:37.942483700");
+
+        //Act
+        var reservation = createReservationUseCase.execute(reservationRequest);
+
+        //Assert
+        assertThat(reservation.getClient().getName()).isEqualTo(reservationRequest.getClient().getName());
+        assertThat(reservation.getClient().getEmail()).isEqualTo(reservationRequest.getClient().getEmail());
+        assertThat(reservation.getClient().getPhoneNumber()).isEqualTo(reservationRequest.getClient().getPhoneNumber());
+        assertThat(reservation.getRestaurant().getRestaurantId()).isEqualTo(reservationRequest.getRestaurant().getRestaurantId());
+    }
+
+    private Reservation gerarReserva(String date, String time) {
+        return   CreateReservationRequest
                 .builder()
                 .name("Zeca")
                 .email("zeca@gmail.com")
                 .phoneNumber("11958974563")
                 .restaurantId(1L)
                 .places(1)
-                .date(LocalDate.now())
-                .time(LocalTime.now())
-                .build();
-
-        var reservation = createReservationUseCase.execute(reservationRequest.toDomain());
-
-        assertThat(reservation.getClient().getName()).isEqualTo(reservationRequest.toDomain().getClient().getName());
-        assertThat(reservation.getClient().getEmail()).isEqualTo(reservationRequest.toDomain().getClient().getEmail());
-        assertThat(reservation.getClient().getPhoneNumber()).isEqualTo(reservationRequest.toDomain().getClient().getPhoneNumber());
-        assertThat(reservation.getRestaurant().getRestaurantId()).isEqualTo(reservationRequest.toDomain().getRestaurant().getRestaurantId());
-        assertThat(reservation.getRestaurant().getTable().getId()).isEqualTo(reservationRequest.toDomain().getRestaurant().getTable().getId());
+                .date(LocalDate.parse(date))
+                .time(LocalTime.parse(time))
+                .build().toDomain();
     }
 
 }

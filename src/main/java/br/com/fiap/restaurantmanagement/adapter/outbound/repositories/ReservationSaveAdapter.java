@@ -3,6 +3,7 @@ package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.ReservationModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.TableModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.UserModel;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
@@ -27,7 +28,7 @@ public class ReservationSaveAdapter implements SaveAdapterPort<Reservation> {
     @Override
     public Reservation save(Reservation reservation) {
 
-        var tableValue = ReservationModel
+        var reservationModel = ReservationModel
                 .builder()
                 .date(reservation.getDate().toString())
                 .time(reservation.getTime().toString())
@@ -43,9 +44,14 @@ public class ReservationSaveAdapter implements SaveAdapterPort<Reservation> {
                         .builder()
                         .id(reservation.getRestaurant().getRestaurantId())
                         .build())
+                .table(TableModel
+                        .builder()
+                        .id(reservation.getRestaurant().getTable().getId())
+                        .description(reservation.getRestaurant().getTable().getDescription())
+                        .build())
                 .build();
 
-        reservationRepository.save(tableValue);
+        reservationRepository.save(reservationModel);
 
         return reservation;
 

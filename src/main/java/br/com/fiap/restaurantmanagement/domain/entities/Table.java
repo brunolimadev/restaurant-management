@@ -1,8 +1,11 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
+import lombok.ToString;
+
 /**
  * This class represents a table
  */
+@ToString
 public class Table {
 
     private Long id;
@@ -43,12 +46,25 @@ public class Table {
         this.capacity = capacity;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return  id;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public int getCapacity() {

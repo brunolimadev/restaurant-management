@@ -15,6 +15,6 @@ import java.util.List;
 public interface TableRepository extends JpaRepository<TableModel, Long> {
 
     @Query(value = "SELECT * FROM restaurant_table tables WHERE tables.restaurant_id = :restaurantId", nativeQuery = true)
-    List<TableModel> findTablesByRestaurantId(@Param("restaurantId") Long restaurantId);
+    List<TableModel> findTablesByRestaurant(@Param("restaurantId") Long restaurantId);
 
 }

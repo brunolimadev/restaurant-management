@@ -3,6 +3,7 @@ package br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.reques
 import br.com.fiap.restaurantmanagement.domain.entities.*;
 import br.com.fiap.restaurantmanagement.domain.enumerators.DaysOfWeek;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * This class represents the create reservation request
  */
-
+@Data
 @Builder
 @NoArgsConstructor
 public class CreateReservationRequest {
