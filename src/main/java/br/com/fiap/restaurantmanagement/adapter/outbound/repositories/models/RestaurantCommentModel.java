@@ -1,12 +1,18 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models;
 
 
+import br.com.fiap.restaurantmanagement.domain.entities.Comment;
+import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
+import br.com.fiap.restaurantmanagement.domain.entities.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents the restaurant comment model
@@ -35,5 +41,19 @@ public class RestaurantCommentModel {
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public static List<RestaurantCommentModel> fromDomain(Restaurant restaurant) {
+
+        List<RestaurantCommentModel> commentModels = new ArrayList<>();
+
+        restaurant.getComments().forEach(c -> {
+            RestaurantCommentModel restaurantCommentModel = new RestaurantCommentModel();
+
+            restaurantCommentModel.setComment(c.getComment());
+            restaurantCommentModel.setCreatedAt(LocalDateTime.now());
+            commentModels.add(restaurantCommentModel);
+        });
+        return commentModels;
+    }
 
 }
