@@ -2,6 +2,7 @@ package br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.reques
 
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
+import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +29,7 @@ public class CreateRestaurantRequest {
 
     private List<CreateRestaurantOpeningHoursRequest> openingHours;
 
-    public Restaurant toDomain() {
+    public Restaurant toDomain() throws FoodTypeNotFoundException {
         return new Restaurant(
                 this.name,
                 this.address.stream().map(CreateRestaurantAddressRequest::toDomain).toList(),
