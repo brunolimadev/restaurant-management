@@ -2,6 +2,7 @@ package br.com.fiap.restaurantmanagement.domain.usecases;
 
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.TableRepository;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.UserRepository;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
@@ -18,15 +19,19 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
 
   private final TableRepository tableRepository;
 
+  private final UserRepository userRepository;
+
   private final Random random = new Random();
 
   public CreateReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort,
                                   ReservationRepository reservationRepository,
-                                  TableRepository tableRepository) {
+                                  TableRepository tableRepository,
+                                  UserRepository userRepository) {
 
     this.reservationSaveAdapterPort = reservationSaveAdapterPort;
     this.reservationRepository = reservationRepository;
     this.tableRepository = tableRepository;
+    this.userRepository = userRepository;
 
   }
 
@@ -34,14 +39,14 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
   public Reservation execute(Reservation reservation) {
 
     var reservations = reservationRepository
-            .findReservationsByRestaurantDateTime(
-                    reservation.getRestaurant().getRestaurantId(),
-                    reservation.getDate().toString(),
-                    reservation.getTime().toString());
+            .findReservationsByRestaurant(
+                    reservation.getRestaurant().getRestaurantId());
 
     var tablesInRestaurant = tableRepository.findTablesByRestaurant(reservation.getRestaurant().getRestaurantId());
 
     var tablesNotReservation = tableRepository.findTablesNotReservation(reservation.getRestaurant().getRestaurantId());
+
+    var user = userRepository.findByEmail(reservation.getClient().getEmail());
 
     if (reservations.isEmpty()) {
 
@@ -50,7 +55,8 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
 
       reservation.getRestaurant().getTable().setId(table.getId());
       reservation.getRestaurant().getTable().setDescription(table.getDescription());
-      reservation.getRestaurant().getTable().setCapacity(table.getNumberOfSeats());
+      reservation.getClient().setId(user.getId());
+      reservation.getClient().setName(user.getName());
 
       return  this.reservationSaveAdapterPort.save(reservation);
 
@@ -64,8 +70,11 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
 
       reservation.getRestaurant().getTable().setId(table.getId());
       reservation.getRestaurant().getTable().setDescription(table.getDescription());
+      reservation.getClient().setId(user.getId());
+      reservation.getClient().setName(user.getName());
 
       return this.reservationSaveAdapterPort.save(reservation);
+
     }
 
     throw new IllegalArgumentException("Todas as mesas estão ocupadas no restaurante para a data e horário selecionados");

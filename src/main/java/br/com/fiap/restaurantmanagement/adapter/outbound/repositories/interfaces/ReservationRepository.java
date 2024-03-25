@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<ReservationModel, Long> {
 
-    @Query(value = "SELECT * FROM reservation reservations WHERE reservations.restaurant_id = :restaurantId AND reservations.date = :date AND reservations.time = :time", nativeQuery = true)
-    List<ReservationModel> findReservationsByRestaurantDateTime(@Param("restaurantId") Long restaurantId, @Param("date") String date, @Param("time") String time);
+    @Query(value = "SELECT * FROM reservation reservations WHERE reservations.restaurant_id = :restaurantId", nativeQuery = true)
+    List<ReservationModel> findReservationsByRestaurant(@Param("restaurantId") Long restaurantId);
 
 }

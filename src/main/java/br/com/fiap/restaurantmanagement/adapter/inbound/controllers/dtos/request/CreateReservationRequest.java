@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * This class represents the create reservation request
@@ -47,6 +46,7 @@ public class CreateReservationRequest {
     }
 
     public Reservation toDomain() {
+
         return new Reservation(
                 new ReservationRestaurant(
                         restaurantId,
@@ -56,6 +56,7 @@ public class CreateReservationRequest {
                 date,
                 time
         );
+
     }
 
     private void validateMandatoryValues(Long restaurantId,
@@ -80,14 +81,19 @@ public class CreateReservationRequest {
     }
 
     private OpeningHours dateAndTimeReservationRequestToOpeningHoursRestaurant() {
+
         return new OpeningHours(
                 DaysOfWeek.validateDay(date.getDayOfWeek().name()),
                 time.format(DateTimeFormatter.ofPattern("HH:mm")),
                 time.format(DateTimeFormatter.ofPattern("HH:mm"))
         );
+
     }
 
     private Table capacityTableReservationRequestToTable() {
+
        return new Table(places);
+
     }
+
 }

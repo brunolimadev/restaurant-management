@@ -23,13 +23,17 @@ public class Reservation {
         this.client = client;
         this.date = LocalDate.parse(date.format((DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         this.time = LocalTime.parse(time.format(DateTimeFormatter.ofPattern("HH:mm")));
+
     }
 
     private void validateMandatoryValues(ReservationRestaurant restaurant, Client client, LocalDate date, LocalTime time) {
 
         if (restaurant == null || client == null || date == null || time == null) {
+
             throw new IllegalArgumentException("todos os dados de reserva são obrigatórios");
+
         }
 
     }
+
 }

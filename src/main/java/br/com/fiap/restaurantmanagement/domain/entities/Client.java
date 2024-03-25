@@ -2,6 +2,7 @@ package br.com.fiap.restaurantmanagement.domain.entities;
 
 public class Client {
 
+    private Long id;
     private String name;
     private String email;
     private String phoneNumber;
@@ -13,6 +14,14 @@ public class Client {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

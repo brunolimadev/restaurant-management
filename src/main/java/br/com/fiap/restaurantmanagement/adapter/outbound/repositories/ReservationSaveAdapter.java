@@ -34,7 +34,7 @@ public class ReservationSaveAdapter implements SaveAdapterPort<Reservation> {
                 .time(reservation.getTime().toString())
                 .user(UserModel
                         .builder()
-                        .id(1L)
+                        .id(reservation.getClient().getId())
                         .name(reservation.getClient().getName())
                         .email(reservation.getClient().getEmail())
                         .phoneNumber(reservation.getClient().getPhoneNumber())
