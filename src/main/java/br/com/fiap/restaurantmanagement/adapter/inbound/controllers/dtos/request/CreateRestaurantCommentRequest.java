@@ -12,18 +12,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateRestaurantCommentRequest {
 
-    private String restaurantId;
+    private Long restaurantId;
 
-    private String userId;
-
-    private String useName;
+    private Long userId;
 
     private String comment;
 
     public Comment toDomain(){
-
-        Comment comment = new Comment(this.useName,this.comment);
-
-        return comment;
+        return new Comment(this.userId,this.comment,this.restaurantId,null);
     }
 }

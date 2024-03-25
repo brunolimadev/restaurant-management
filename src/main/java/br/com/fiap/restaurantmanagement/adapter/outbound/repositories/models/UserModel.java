@@ -25,4 +25,9 @@ public class UserModel {
     @Column(name = "email")
     private String email;
 
+    public UserModel(Long id) {
+        this.id = id;
+    }
 }
+
+

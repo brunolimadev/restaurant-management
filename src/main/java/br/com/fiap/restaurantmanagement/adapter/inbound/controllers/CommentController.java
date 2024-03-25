@@ -24,7 +24,16 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<CreateCommentResponse> createComment(@RequestBody CreateRestaurantCommentRequest createCommentRequest) {
 
-        Comment comment = createCommentUseCasePort.execute(createCommentRequest.toDomain());
+        try {
+            Comment comment = createCommentUseCasePort.execute(createCommentRequest.toDomain());
+        }
+
+        catch (RuntimeException ex ){
+            return ResponseEntity.badRequest().body(
+                    CreateCommentResponse.builder()
+                            .mensagemRetorno(ex.getMessage())
+                            .build());
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 CreateCommentResponse.builder()

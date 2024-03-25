@@ -5,9 +5,7 @@ import br.com.fiap.restaurantmanagement.domain.entities.Comment;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.entities.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -19,6 +17,9 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "restaurant_comment")
 public class RestaurantCommentModel {
@@ -47,8 +48,8 @@ public class RestaurantCommentModel {
         List<RestaurantCommentModel> commentModels = new ArrayList<>();
 
         restaurant.getComments().forEach(c -> {
-            RestaurantCommentModel restaurantCommentModel = new RestaurantCommentModel();
 
+            RestaurantCommentModel restaurantCommentModel = new RestaurantCommentModel();
             restaurantCommentModel.setComment(c.getComment());
             restaurantCommentModel.setCreatedAt(LocalDateTime.now());
             commentModels.add(restaurantCommentModel);
@@ -56,4 +57,7 @@ public class RestaurantCommentModel {
         return commentModels;
     }
 
+    public Comment toDomain() {
+        return new Comment(this.id,this.comment,this.restaurant.getId(), this.getCreatedAt());
+    }
 }
