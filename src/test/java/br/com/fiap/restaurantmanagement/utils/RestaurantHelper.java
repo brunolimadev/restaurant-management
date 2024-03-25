@@ -18,7 +18,7 @@ public class RestaurantHelper {
 
     public static Restaurant createRestaurant() {
 
-        var restaurant = new Restaurant(
+        return new Restaurant(
                 "Restaurant 1",
                 createAddresses(),
                 TypesOfFood.BRAZILIAN,
@@ -26,7 +26,6 @@ public class RestaurantHelper {
                 createTables()
         );
 
-        return restaurant;
     }
 
     public static RestaurantModel createRestaurantModel() {
@@ -63,6 +62,7 @@ public class RestaurantHelper {
         address.setState("Estado 1");
         address.setCountry("Pais 1");
         address.setZipCode("CEP 1");
+        address.setRestaurant(createRestaurantModel());
 
         return address;
     }
@@ -148,47 +148,48 @@ public class RestaurantHelper {
     }
 
     public static String createRestaurantRequestJson(){
-        return "{\n" +
-                "    \"name\": \"Dona Chica\",\n" +
-                "    \"foodType\": \"BRAZILIAN\",\n" +
-                "    \"address\": [{\n" +
-                "        \"street\": \"Av. Paulista\",\n" +
-                "        \"number\": \"1010\",\n" +
-                "        \"complement\": \"\",\n" +
-                "        \"neighborhood\": \"centro\",\n" +
-                "        \"city\": \"São Paulo\",\n" +
-                "        \"state\": \"SP\",\n" +
-                "        \"zipCode\": \"10001-005\",\n" +
-                "        \"country\": \"Brazil\"\n" +
-                "    }],\n" +
-                "    \"tables\": [\n" +
-                "        {\n" +
-                "            \"description\": \"1\",\n" +
-                "            \"numberOfSeats\": 10\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"description\": \"2\",\n" +
-                "            \"numberOfSeats\": 4\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"description\": \"3\",\n" +
-                "            \"numberOfSeats\": 6\n" +
-                "        }\n" +
-                "    ],\n" +
-                "    \"openingHours\": [\n" +
-                "        {\n" +
-                "            \"dayOfWeek\": \"SATURDAY\",\n" +
-                "            \"openingTime\": \"10:00\",\n" +
-                "            \"closingTime\": \"22:00\"\n" +
-                "\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"dayOfWeek\": \"SUNDAY\",\n" +
-                "            \"openingTime\": \"10:00\",\n" +
-                "            \"closingTime\": \"22:00\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "    \n" +
-                "}";
+        return """
+                {
+                    "name": "Dona Chica",
+                    "foodType": "BRAZILIAN",
+                    "address": [{
+                        "street": "Av. Paulista",
+                        "number": "1010",
+                        "complement": "",
+                        "neighborhood": "centro",
+                        "city": "São Paulo",
+                        "state": "SP",
+                        "zipCode": "10001-005",
+                        "country": "Brazil"
+                    }],
+                    "tables": [
+                        {
+                            "description": "1",
+                            "numberOfSeats": 10
+                        },
+                        {
+                            "description": "2",
+                            "numberOfSeats": 4
+                        },
+                        {
+                            "description": "3",
+                            "numberOfSeats": 6
+                        }
+                    ],
+                    "openingHours": [
+                        {
+                            "dayOfWeek": "SATURDAY",
+                            "openingTime": "10:00",
+                            "closingTime": "22:00"
+
+                        },
+                        {
+                            "dayOfWeek": "SUNDAY",
+                            "openingTime": "10:00",
+                            "closingTime": "22:00"
+                        }
+                    ]
+                   \s
+                }""";
     }
 }

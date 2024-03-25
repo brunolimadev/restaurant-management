@@ -2,14 +2,19 @@ package br.com.fiap.restaurantmanagement.adapter.inbound.controllers;
 
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request.CreateRestaurantRequest;
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.response.CreateRestaurantResponse;
+import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.response.SearchRestaurant;
+import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.response.SearchRestaurantResponse;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
+import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateRestaurantUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.ports.inbound.SearchRestaurantUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.usecases.SearchRestaurantUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * This class represents the restaurant controller
@@ -20,12 +25,39 @@ public class RestaurantController {
 
     private final CreateRestaurantUseCasePort createRestaurantUseCasePort;
 
-    public RestaurantController(CreateRestaurantUseCasePort createRestaurantUseCasePort) {
+    private final SearchRestaurantUseCasePort searchRestaurantUseCasePort;
+
+    public RestaurantController(CreateRestaurantUseCasePort createRestaurantUseCasePort, SearchRestaurantUseCasePort searchRestaurantUseCasePort) {
         this.createRestaurantUseCasePort = createRestaurantUseCasePort;
+        this.searchRestaurantUseCasePort = searchRestaurantUseCasePort;
+    }
+
+    @GetMapping
+    public ResponseEntity<SearchRestaurantResponse> getRestaurant(
+            @RequestParam("name") Optional<String> name,
+            @RequestParam("location") Optional<String> location,
+            @RequestParam("typeOfFood") Optional<String> typeOfFood
+    ) throws FoodTypeNotFoundException {
+
+        SearchRestaurantResponse response = new SearchRestaurantResponse();
+
+        List<Restaurant> restaurants = searchRestaurantUseCasePort.execute(name, location, typeOfFood);
+
+        for (Restaurant restaurant : restaurants) {
+
+            response.getRestaurants().add(new SearchRestaurant(
+                    restaurant.getId(),
+                    restaurant.getName(),
+                    restaurant.getTypeOfFood().name(),
+                    restaurant.getAddress().get(0).getStreet()
+            ));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping
-    public ResponseEntity<CreateRestaurantResponse> createRestaurant(@RequestBody CreateRestaurantRequest createRestaurantRequest) {
+    public ResponseEntity<CreateRestaurantResponse> createRestaurant(@RequestBody CreateRestaurantRequest createRestaurantRequest) throws FoodTypeNotFoundException {
 
         Restaurant restaurant = createRestaurantUseCasePort.execute(createRestaurantRequest.toDomain());
 

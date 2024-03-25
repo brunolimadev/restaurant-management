@@ -41,6 +41,28 @@ public class Restaurant {
         this.comments = Arrays.asList();
     }
 
+    public Restaurant(Long id, String name, List<Address> address, TypesOfFood typeOfFood, List<OpeningHours> openingHours, List<Table> tables, int likes, List<Comment> comments) {
+
+        if (name == null || name.isEmpty())
+            throw new IllegalArgumentException("Name cannot be null or empty");
+
+        if (address == null)
+            throw new IllegalArgumentException("Address cannot be null");
+
+        if (typeOfFood == null)
+            throw new IllegalArgumentException("TypesOfFood cannot be null");
+
+
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.typeOfFood = typeOfFood;
+        this.openingHours = openingHours;
+        this.tables = tables;
+        this.likes = likes;
+        this.comments = comments;
+    }
+
     public Restaurant(String name, List<Address> address, TypesOfFood typeOfFood, List<OpeningHours> openingHours, List<Table> tables, int likes, List<Comment> comments) {
 
         if (name == null || name.isEmpty())

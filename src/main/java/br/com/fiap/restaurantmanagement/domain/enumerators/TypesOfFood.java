@@ -1,5 +1,7 @@
 package br.com.fiap.restaurantmanagement.domain.enumerators;
 
+import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
+
 /**
  * This enum represents the access roles
  */
@@ -17,12 +19,12 @@ public enum TypesOfFood {
     AMERICAN,
     OTHER;
 
-    public static TypesOfFood findByName(String name){
+    public static TypesOfFood findByName(String name) throws FoodTypeNotFoundException {
         for (TypesOfFood type : TypesOfFood.values()) {
-            if (type.name().equals(name)) {
+            if (type.name().equalsIgnoreCase(name)) {
                 return type;
             }
         }
-        throw new IllegalArgumentException("Invalid type of food");
+        throw new FoodTypeNotFoundException("Invalid type of food");
     }
 }
