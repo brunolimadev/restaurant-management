@@ -17,4 +17,10 @@ public interface TableRepository extends JpaRepository<TableModel, Long> {
     @Query(value = "SELECT * FROM restaurant_table tables WHERE tables.restaurant_id = :restaurantId", nativeQuery = true)
     List<TableModel> findTablesByRestaurant(@Param("restaurantId") Long restaurantId);
 
+    @Query(value = "SELECT * FROM restaurant_table " +
+            "WHERE NOT EXISTS " +
+            "(SELECT * FROM reservation WHERE restaurant_table.id = reservation.restaraunt_table_id) " +
+            "and restaurant_table.restaurant_id = :restaurantId", nativeQuery = true)
+    List<TableModel> findTablesNotReservation(@Param("restaurantId") Long restaurantId);
+
 }

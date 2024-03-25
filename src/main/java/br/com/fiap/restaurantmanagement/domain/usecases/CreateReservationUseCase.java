@@ -2,13 +2,9 @@ package br.com.fiap.restaurantmanagement.domain.usecases;
 
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.TableRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.TableModel;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
-
-import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -43,12 +39,14 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
                     reservation.getDate().toString(),
                     reservation.getTime().toString());
 
-    var tables = tableRepository.findTablesByRestaurant(reservation.getRestaurant().getRestaurantId());
+    var tablesInRestaurant = tableRepository.findTablesByRestaurant(reservation.getRestaurant().getRestaurantId());
+
+    var tablesNotReservation = tableRepository.findTablesNotReservation(reservation.getRestaurant().getRestaurantId());
 
     if (reservations.isEmpty()) {
 
-      var tableSelect = random.nextInt(tables.size() - 1);
-      var table = tables.get(tableSelect);
+      var tableSelect = random.nextInt(tablesInRestaurant.size() - 1);
+      var table = tablesInRestaurant.get(tableSelect);
 
       reservation.getRestaurant().getTable().setId(table.getId());
       reservation.getRestaurant().getTable().setDescription(table.getDescription());
@@ -58,33 +56,15 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
 
     }
 
-    if (reservations.size() < tables.size()) {
+    if (reservations.size() < tablesInRestaurant.size()) {
 
-//      reservations.forEach(reservationModel -> tables
-//              .forEach(tableModel -> {
-//
-//                if (!(Objects.equals(tableModel.getId(), reservationModel.getTable().getId()) &&
-//                        (reservation.getDate().isEqual(LocalDate.parse(reservationModel.getDate())) &&
-//                                reservation.getTime().toString().equals(reservationModel.getTime())))) {
-//
-//                  reservation.getRestaurant().getTable().setId(tableModel.getId());
-//                  reservation.getRestaurant().getTable().setDescription(tableModel.getDescription());
-//
-//                }
-//              }));
+      var table = tablesNotReservation.stream()
+              .findFirst()
+              .orElseThrow();
 
-      reservations.forEach(reservationModel -> {
-        for (TableModel tableModel : tables) {
-          if (!(Objects.equals(tableModel.getId(), reservationModel.getTable().getId()) &&
-                  (reservation.getDate().isEqual(LocalDate.parse(reservationModel.getDate())) &&
-                          reservation.getTime().toString().equals(reservationModel.getTime())))) {
+      reservation.getRestaurant().getTable().setId(table.getId());
+      reservation.getRestaurant().getTable().setDescription(table.getDescription());
 
-            reservation.getRestaurant().getTable().setId(tableModel.getId());
-            reservation.getRestaurant().getTable().setDescription(tableModel.getDescription());
-            break;
-          }
-        }
-      });
       return this.reservationSaveAdapterPort.save(reservation);
     }
 
