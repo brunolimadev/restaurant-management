@@ -1,9 +1,9 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.CommentRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.*;
-import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantCommentModel;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.UserModel;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
