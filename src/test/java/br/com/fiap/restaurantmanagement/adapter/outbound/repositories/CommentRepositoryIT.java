@@ -44,7 +44,7 @@ class CommentRepositoryIT {
         RestaurantCommentModel commentModel = new RestaurantCommentModel();
         commentModel.setId(1L);
         commentModel.setCreatedAt(LocalDateTime.now());
-        commentModel.setUser(new UserModel(1L,"Usuario Teste","usuario@gmail.com"));
+        commentModel.setUser(new UserModel(1L,"Usuario Teste","usuario@gmail.com","99999-9999"));
         commentModel.setRestaurant(new RestaurantModel(1L));
         commentModel.setComment("Comentário de teste");
 
