@@ -6,7 +6,9 @@ import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.respons
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.response.GetReservationsResponse;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.ports.inbound.DeleteReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.FindReservationsUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.usecases.DeleteReservationUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,24 +28,29 @@ public class ReservationController {
 
     private final FindReservationsUseCasePort findReservationsUseCasePort;
 
+    private final DeleteReservationUseCasePort deleteReservationUseCasePort;
+
     public ReservationController(
             CreateReservationUseCasePort createReservationUseCasePort,
-            FindReservationsUseCasePort findReservationsUseCasePort) {
+            FindReservationsUseCasePort findReservationsUseCasePort,
+            DeleteReservationUseCasePort deleteReservationUseCasePort) {
 
         this.createReservationUseCasePort = createReservationUseCasePort;
         this.findReservationsUseCasePort = findReservationsUseCasePort;
-
+        this.deleteReservationUseCasePort = deleteReservationUseCasePort;
     }
 
     @PostMapping
     public ResponseEntity<CreateReservationResponse> createReservation(@RequestBody CreateReservationRequest createReservationRequest) {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                CreateReservationResponse
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(
+                        CreateReservationResponse
                         .builder()
                         .reservation(createReservationUseCasePort.execute(createReservationRequest.toDomain()))
                         .message("Reserva realizada com sucesso")
-                        .build());
+                        .build()
+                );
     }
 
     @GetMapping
@@ -52,8 +59,9 @@ public class ReservationController {
             @RequestHeader("date") String date,
             @RequestHeader("time") String time) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(
-                GetReservationsResponse
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(
+                        GetReservationsResponse
                         .builder()
                         .reservations(findReservationsUseCasePort.get(
                                 GetReservationsRequestHeaders
@@ -63,7 +71,21 @@ public class ReservationController {
                                         .time(LocalTime.parse(time))
                                         .build())
                         )
-                        .build().getReservations());
+                        .build().getReservations()
+                );
+
+    }
+
+    @DeleteMapping
+    @RequestMapping("{id}")
+    public ResponseEntity<Reservation> deleteReservation(
+            @PathVariable("id") String id
+    ) {
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(
+                        deleteReservationUseCasePort.delete(Long.parseLong(id))
+                );
 
     }
 }
