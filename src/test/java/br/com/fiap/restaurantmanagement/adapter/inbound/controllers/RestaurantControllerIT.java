@@ -42,6 +42,17 @@ public class RestaurantControllerIT {
                     .statusCode(HttpStatus.CREATED.value());
         }
 
+        @Test
+        void shouldSearchARestaurant(){
+            given()
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .queryParam("name", "Sushi Yoshi")
+                    .when()
+                    .get("/restaurant-management/api/restaurant")
+                    .then()
+                    .statusCode(HttpStatus.OK.value());
+        }
+
     }
 
 }
