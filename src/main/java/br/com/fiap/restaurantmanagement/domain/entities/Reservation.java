@@ -38,7 +38,7 @@ public class Reservation {
 
         if (restaurant == null || client == null || date == null || time == null) {
 
-            throw new IllegalArgumentException("todos os dados de reserva são obrigatórios");
+            throw new IllegalArgumentException("All booking details are mandatory");
 
         }
 
