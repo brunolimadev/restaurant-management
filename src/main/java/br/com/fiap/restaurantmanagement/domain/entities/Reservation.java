@@ -26,6 +26,14 @@ public class Reservation {
 
     }
 
+    public Reservation(ReservationRestaurant restaurant, LocalDate date, LocalTime time) {
+
+        this.restaurant = restaurant;
+        this.date = LocalDate.parse(date.format((DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        this.time = LocalTime.parse(time.format(DateTimeFormatter.ofPattern("HH:mm")));
+
+    }
+
     private void validateMandatoryValues(ReservationRestaurant restaurant, Client client, LocalDate date, LocalTime time) {
 
         if (restaurant == null || client == null || date == null || time == null) {

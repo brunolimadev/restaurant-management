@@ -9,8 +9,18 @@ public class Client {
 
     public Client(String name, String email, String phoneNumber) {
 
-        validateValues(name, email, phoneNumber);
+        validateValues(name, email);
 
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Client(Long id, String name, String email, String phoneNumber) {
+
+        validateValues(name, email);
+
+        this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -48,28 +58,17 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    private void validateValues(String name, String email, String phoneNumber) {
-        validateMandatoryValues(name, email, phoneNumber);
+    private void validateValues(String name, String email) {
+        validateMandatoryValues(name, email);
     }
 
-    private void validateMandatoryValues(String name, String email, String phoneNumber) {
-        if (name == null || email == null || phoneNumber == null) {
+    private void validateMandatoryValues(String name, String email) {
+        if (name == null || email == null) {
             throw new IllegalArgumentException("os campos não podem ser nulos");
         }
-        if (name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty()) {
             throw new IllegalArgumentException("todas as informações do cliente devem ser preenchidas");
         }
     }
 
-    private void validateName(String name) {
-        
-    }
-
-    private void validateEmail(String email) {
-
-    }
-
-    private void validatePhoneNumber(String phoneNumber) {
-
-    }
 }

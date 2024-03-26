@@ -46,6 +46,18 @@ public class Table {
         this.capacity = capacity;
     }
 
+    public Table(Long id, String description, int capacity) {
+        if (description == null || description.isEmpty())
+            throw new IllegalArgumentException("Description cannot be null or empty");
+
+        if (capacity <= 0)
+            throw new IllegalArgumentException("Capacity cannot be less than or equal to zero");
+
+        this.id = id;
+        this.description = description;
+        this.capacity = capacity;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

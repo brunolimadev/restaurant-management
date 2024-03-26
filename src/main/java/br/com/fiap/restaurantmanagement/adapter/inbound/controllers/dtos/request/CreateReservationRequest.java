@@ -1,14 +1,12 @@
 package br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request;
 
 import br.com.fiap.restaurantmanagement.domain.entities.*;
-import br.com.fiap.restaurantmanagement.domain.enumerators.DaysOfWeek;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * This class represents the create reservation request
@@ -50,7 +48,6 @@ public class CreateReservationRequest {
         return new Reservation(
                 new ReservationRestaurant(
                         restaurantId,
-                        dateAndTimeReservationRequestToOpeningHoursRestaurant(),
                         capacityTableReservationRequestToTable()),
                 new Client(name, email, phoneNumber),
                 date,
@@ -77,16 +74,6 @@ public class CreateReservationRequest {
             throw new IllegalArgumentException("os campos não podem ser nulos");
 
         }
-
-    }
-
-    private OpeningHours dateAndTimeReservationRequestToOpeningHoursRestaurant() {
-
-        return new OpeningHours(
-                DaysOfWeek.validateDay(date.getDayOfWeek().name()),
-                time.format(DateTimeFormatter.ofPattern("HH:mm")),
-                time.format(DateTimeFormatter.ofPattern("HH:mm"))
-        );
 
     }
 
