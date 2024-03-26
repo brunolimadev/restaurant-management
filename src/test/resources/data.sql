@@ -1,4 +1,4 @@
-insert into restaurant_user (name, email) values ('Bruno Lima', 'bruno@test.com.br');
+insert into restaurant_user (name, email) values ('Bruno Lima', 'bruno@test.com.br'), ('Zeca', 'zeca@gmail.com');
 
 insert into food_type (name) values ('JAPANESE'), ('ITALIAN'), ('BRAZILIAN'), ('MEXICAN'), ('CHINESE');
 
