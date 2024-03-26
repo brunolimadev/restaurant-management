@@ -13,9 +13,13 @@ public class OpeningHours {
     private String closingTime;
 
     public OpeningHours(DaysOfWeek dayOfWeek, String openingTime, String closingTime) {
+
+        validateMandatoryValues(dayOfWeek, openingTime, closingTime);
+
         this.dayOfWeek = dayOfWeek;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+
     }
 
     public DaysOfWeek getDayOfWeek() {
@@ -28,5 +32,13 @@ public class OpeningHours {
 
     public String getClosingTime() {
         return closingTime;
+    }
+
+    private void validateMandatoryValues(DaysOfWeek dayOfWeek, String openingTime, String closingTime) {
+
+        if (dayOfWeek == null || openingTime == null || closingTime == null) {
+            throw new IllegalArgumentException("os campos não podem ser nulos");
+        }
+
     }
 }
