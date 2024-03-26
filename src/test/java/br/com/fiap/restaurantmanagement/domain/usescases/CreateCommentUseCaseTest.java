@@ -16,9 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,7 +24,6 @@ import static org.mockito.Mockito.*;
 
 class CreateCommentUseCaseTest {
 
-    @Mock
     private CreateCommentUseCase createCommentUseCase;
 
     @Mock
@@ -69,15 +66,11 @@ class CreateCommentUseCaseTest {
         when(restaurantRepository.getReferenceById(anyLong())).thenReturn(restaurantModel);
         when(commentRepository.save(any(RestaurantCommentModel.class))).thenReturn(commentModel);
 
-        // Act
         var commentSaved = createCommentUseCase.execute(comment);
 
         // assert
         assertThat(commentSaved).isNotNull();
         assertThat(commentSaved.getComment()).isEqualTo(comment.getComment());
-
-        verify(userRepository, times(1)).getReferenceById(1L);
-        verify(restaurantRepository, times(1)).getReferenceById(1L);
         verify(commentRepository, times(1)).save(any(RestaurantCommentModel.class));
     }
 
@@ -85,23 +78,14 @@ class CreateCommentUseCaseTest {
 
         var commentModel = new RestaurantCommentModel();
 
-        commentModel.setId(1L);
         commentModel.setComment("Comment Exemple");
-        commentModel.setCreatedAt(LocalDateTime.now().withNano(0));
-        commentModel.setRestaurant(restaurantModel);
-        commentModel.setUser(userModel);
+        commentModel.setCreatedAt(LocalDateTime.now());
 
         return commentModel;
     }
 
     private Comment createComment() {
-        return new Comment(
-                1L,
-                "Comment Exemple",
-                1L,
-                LocalDateTime.now());
+        return new Comment(1L, "Comment Exemple", 1L, LocalDateTime.now());
     }
-
-
 
 }

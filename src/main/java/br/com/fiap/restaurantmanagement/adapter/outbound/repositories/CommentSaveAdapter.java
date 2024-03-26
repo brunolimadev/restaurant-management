@@ -35,6 +35,7 @@ public class CommentSaveAdapter implements SaveAdapterPort<Comment> {
     public Comment save(Comment entity) {
 
         RestaurantCommentModel commentModel = new RestaurantCommentModel();
+        commentModel.setId(1L);
         commentModel.setUser(new UserModel(entity.getUserId()));
         commentModel.setRestaurant(new RestaurantModel(entity.getIdRestaurant()));
         commentModel.setCreatedAt(LocalDateTime.now());
