@@ -2,14 +2,11 @@ package br.com.fiap.restaurantmanagement.domain.usecases;
 
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request.GetReservationsRequestHeaders;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
-import br.com.fiap.restaurantmanagement.domain.entities.Client;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.ReservationModel;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
-import br.com.fiap.restaurantmanagement.domain.entities.ReservationRestaurant;
-import br.com.fiap.restaurantmanagement.domain.entities.Table;
+import br.com.fiap.restaurantmanagement.domain.exceptions.TransactionException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.FindReservationsUseCasePort;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,29 +23,31 @@ public class FindReservationsUseCase implements FindReservationsUseCasePort {
   @Override
   public List<Reservation> get(GetReservationsRequestHeaders getReservationsRequestHeaders) {
 
-    var restaurantReservation = reservationRepository
-            .findReservationsByRestaurant(getReservationsRequestHeaders.getRestaurantId());
+    try {
+
+      var restaurantReservation = reservationRepository.findReservationsByRestaurant(
+                      getReservationsRequestHeaders.getRestaurantId()
+      );
+
+      return toListReservation(restaurantReservation);
+
+    } catch (Exception exception) {
+
+      throw  new TransactionException("An error occurred while processing reservation list");
+
+    }
+
+  }
+
+  private List<Reservation> toListReservation(List<ReservationModel> reservations) {
 
     var reservationsToReturn = new ArrayList<Reservation>();
 
-    restaurantReservation.forEach(reservationModel -> reservationsToReturn
-            .add(
-                    new Reservation(
-                    new ReservationRestaurant(
-                            reservationModel.getRestaurant().getId(),
-                            new Table(
-                                    reservationModel.getTable().getId(),
-                                    reservationModel.getTable().getDescription(),
-                                    reservationModel.getNumberOfpeople())),
-                            new Client(
-                                    reservationModel.getUser().getId(),
-                                    reservationModel.getUser().getName(),
-                                    reservationModel.getUser().getEmail(),
-                                    reservationModel.getUser().getPhoneNumber()),
-                            LocalDate.parse(reservationModel.getDate()),
-                            LocalTime.parse(reservationModel.getTime())
+    reservations.forEach(reservationModel ->
+            reservationsToReturn.add(
+                    Reservation.toReservation(reservationModel)
             )
-    ));
+    );
 
     return reservationsToReturn;
 
