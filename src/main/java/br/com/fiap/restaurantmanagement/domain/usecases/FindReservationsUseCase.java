@@ -1,22 +1,22 @@
 package br.com.fiap.restaurantmanagement.domain.usecases;
 
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request.GetReservationsRequestHeaders;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.ReservationModel;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.exceptions.TransactionException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.FindReservationsUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.ReservationAdapterPort;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindReservationsUseCase implements FindReservationsUseCasePort {
 
-  private final ReservationRepository reservationRepository;
+  private final ReservationAdapterPort reservationAdapterPort;
 
-  public FindReservationsUseCase(ReservationRepository reservationRepository) {
+  public FindReservationsUseCase(ReservationAdapterPort reservationAdapterPort) {
 
-    this.reservationRepository = reservationRepository;
+    this.reservationAdapterPort = reservationAdapterPort;
 
   }
 
@@ -25,7 +25,7 @@ public class FindReservationsUseCase implements FindReservationsUseCasePort {
 
     try {
 
-      var restaurantReservation = reservationRepository.findReservationsByRestaurant(
+      var restaurantReservation = reservationAdapterPort.findReservationsByRestaurant(
                       getReservationsRequestHeaders.getRestaurantId()
       );
 
