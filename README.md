@@ -66,7 +66,7 @@
 - [Dbeaver](https://dbeaver.io/download/)
 
 ## 📋 Diagrama ER
-![img_2.png](img_2.png)
+![img_2.png](src/main/resources/images/img_2.png)
 
 
 ## 📋 Swagger
