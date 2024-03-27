@@ -34,8 +34,8 @@ public class Comment {
 			throw new IllegalArgumentException("IdRestaurant cannot be null");
 		}
 
-		if (Objects.isNull(rating)) {
-			throw new IllegalArgumentException("Rating cannot be null");
+		if (Objects.isNull(rating) || rating > 5 || rating < 1) {
+			throw new IllegalArgumentException("The rating cannot be null and must be between 1 and 5");
 		}
 
 		this.userId = userId;

@@ -61,6 +61,6 @@ public class RestaurantCommentModel {
     }
 
     public Comment toDomain() {
-        return new Comment(this.id,this.comment,this.restaurant.getId(), this.getCreatedAt(), this.rating);
+        return new Comment(this.user.getId(),this.comment,this.restaurant.getId(), this.getCreatedAt(), this.rating);
     }
 }
