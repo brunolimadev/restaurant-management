@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "bd87726f-9f9a-44cb-8a8c-025726b8a1d8",
+		"name": "Fiap - Restaurants",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11174996"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Create Restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dona Chica\",\r\n    \"foodType\": \"BRAZILIAN\",\r\n    \"address\": [{\r\n        \"street\": \"Av. Paulista\",\r\n        \"number\": \"1010\",\r\n        \"complement\": \"\",\r\n        \"neighborhood\": \"centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"10001-005\",\r\n        \"country\": \"Brazil\"\r\n    }],\r\n    \"tables\": [\r\n        {\r\n            \"description\": \"1\",\r\n            \"numberOfSeats\": 10\r\n        },\r\n        {\r\n            \"description\": \"2\",\r\n            \"numberOfSeats\": 4\r\n        },\r\n        {\r\n            \"description\": \"3\",\r\n            \"numberOfSeats\": 6\r\n        }\r\n    ],\r\n    \"openingHours\": [\r\n        {\r\n            \"dayOfWeek\": \"SATURDAY\",\r\n            \"openingTime\": \"10:00\",\r\n            \"closingTime\": \"22:00\"\r\n\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SUNDAY\",\r\n            \"openingTime\": \"10:00\",\r\n            \"closingTime\": \"22:00\"\r\n        }\r\n    ]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurant"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Restaurant",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Dona Chica\",\r\n    \"foodType\": \"BRAZILIAN\",\r\n    \"address\": {\r\n        \"street\": \"Av. Paulista\",\r\n        \"number\": \"1009\",\r\n        \"complement\": \"\",\r\n        \"neighborhood\": \"centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"10001-005\",\r\n        \"country\": \"Brazil\"\r\n    },\r\n    \"tables\": [\r\n        {\r\n            \"description\": \"1\",\r\n            \"numberOfSeats\": 10\r\n        },\r\n        {\r\n            \"description\": \"2\",\r\n            \"numberOfSeats\": 4\r\n        },\r\n        {\r\n            \"description\": \"3\",\r\n            \"numberOfSeats\": 6\r\n        }\r\n    ],\r\n    \"openingHours\": [\r\n        {\r\n            \"dayOfWeek\": \"SATURDAY\",\r\n            \"openingTime\": \"10:00\",\r\n            \"closingTime\": \"22:00\"\r\n\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SUNDAY\",\r\n            \"openingTime\": \"10:00\",\r\n            \"closingTime\": \"22:00\"\r\n        }\r\n    ]\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant",
+									"protocol": "https",
+									"host": [
+										"fiap-restaurant-management-9269febe02fa",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"restaurant"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Search Restaurant",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/restaurant-management/api/restaurant?name=Yoshi Sushi&location=Av. Paulista&foodType=japanase",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"restaurant-management",
+										"api",
+										"restaurant"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Yoshi Sushi"
+										},
+										{
+											"key": "location",
+											"value": "Av. Paulista"
+										},
+										{
+											"key": "foodType",
+											"value": "japanase"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Create Reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"name\": \"Eric\",\r\n    \"email\": \"eric@gmail.com.br\",\r\n    \"phoneNumber\": \"119999999\",\r\n    \"date\": \"2024-03-24\",\r\n    \"time\": \"19:11\",\r\n    \"places\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurant-management/api/reservation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurant-management",
+								"api",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Reservations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "restaurant_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/restaurant-management/api/reservation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurant-management",
+								"api",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Reservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurant-management/api/reservation/67",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurant-management",
+								"api",
+								"reservation",
+								"67"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:8080/restaurant-management/api/restaurant?name=Yoshi Sushi&location=Av. Paulista&foodType=japanase",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurant-management",
+								"api",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Yoshi Sushi"
+								},
+								{
+									"key": "location",
+									"value": "Av. Paulista"
+								},
+								{
+									"key": "foodType",
+									"value": "japanase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment Restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"userId\": 1,\r\n    \"comment\": \"Excelente restaurante\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8080/restaurant-management/api/comment",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurant-management",
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Heroku",
+			"item": [
+				{
+					"name": "Create Restaurant - Heroku",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dona Chica\",\r\n    \"foodType\": \"BRAZILIAN\",\r\n    \"address\": {\r\n        \"street\": \"Av. Paulista\",\r\n        \"number\": \"1009\",\r\n        \"complement\": \"\",\r\n        \"neighborhood\": \"centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"10001-005\",\r\n        \"country\": \"Brazil\"\r\n    },\r\n    \"tables\": [\r\n        {\r\n            \"description\": \"1\",\r\n            \"numberOfSeats\": 10\r\n        },\r\n        {\r\n            \"description\": \"2\",\r\n            \"numberOfSeats\": 4\r\n        },\r\n        {\r\n            \"description\": \"3\",\r\n            \"numberOfSeats\": 6\r\n        }\r\n    ],\r\n    \"openingHours\": [\r\n        {\r\n            \"dayOfWeek\": \"SATURDAY\",\r\n            \"openingTime\": \"10:00\",\r\n            \"closingTime\": \"22:00\"\r\n\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SUNDAY\",\r\n            \"openingTime\": \"10:00\",\r\n            \"closingTime\": \"22:00\"\r\n        }\r\n    ]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant-management/api/restaurant",
+							"protocol": "https",
+							"host": [
+								"fiap-restaurant-management-9269febe02fa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"restaurant-management",
+								"api",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reservation - Heroku",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"name\": \"Eric\",\r\n    \"email\": \"eric@gmail.com.br\",\r\n    \"phoneNumber\": \"119999999\",\r\n    \"date\": \"2024-03-24\",\r\n    \"time\": \"19:11\",\r\n    \"places\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant-management/api/reservation",
+							"protocol": "https",
+							"host": [
+								"fiap-restaurant-management-9269febe02fa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"restaurant-management",
+								"api",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Reservations - Heroku",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "restaurant_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant-management/api/reservation",
+							"protocol": "https",
+							"host": [
+								"fiap-restaurant-management-9269febe02fa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"restaurant-management",
+								"api",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Reservation - Heroku",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant-management/api/reservation/68",
+							"protocol": "https",
+							"host": [
+								"fiap-restaurant-management-9269febe02fa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"restaurant-management",
+								"api",
+								"reservation",
+								"68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Restaurant - Heroku",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant-management/api/restaurant?name=Yoshi Sushi&location=Av. Paulista&foodType=japanase",
+							"protocol": "https",
+							"host": [
+								"fiap-restaurant-management-9269febe02fa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"restaurant-management",
+								"api",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Yoshi Sushi"
+								},
+								{
+									"key": "location",
+									"value": "Av. Paulista"
+								},
+								{
+									"key": "foodType",
+									"value": "japanase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment Restaurant - Heroku",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"userId\": 1,\r\n    \"comment\": \"Excelente restaurante\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fiap-restaurant-management-9269febe02fa.herokuapp.com/restaurant-management/api/comment",
+							"protocol": "https",
+							"host": [
+								"fiap-restaurant-management-9269febe02fa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"restaurant-management",
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

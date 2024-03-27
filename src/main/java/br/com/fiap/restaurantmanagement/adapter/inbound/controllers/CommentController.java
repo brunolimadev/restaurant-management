@@ -2,7 +2,6 @@ package br.com.fiap.restaurantmanagement.adapter.inbound.controllers;
 
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.request.CreateRestaurantCommentRequest;
 import br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.response.CreateCommentResponse;
-import br.com.fiap.restaurantmanagement.domain.entities.Comment;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateCommentUseCasePort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,19 +24,19 @@ public class CommentController {
     public ResponseEntity<CreateCommentResponse> createComment(@RequestBody CreateRestaurantCommentRequest createCommentRequest) {
 
         try {
-            Comment comment = createCommentUseCasePort.execute(createCommentRequest.toDomain());
+            createCommentUseCasePort.execute(createCommentRequest.toDomain());
         }
 
         catch (RuntimeException ex ){
             return ResponseEntity.badRequest().body(
                     CreateCommentResponse.builder()
-                            .mensagemRetorno(ex.getMessage())
+                            .message(ex.getMessage())
                             .build());
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 CreateCommentResponse.builder()
-                        .mensagemRetorno("Comentário Cadastrado com sucesso!")
+                        .message("Comment successfully registered!")
                         .build());
     }
 }

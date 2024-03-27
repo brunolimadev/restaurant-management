@@ -64,10 +64,10 @@ public class Client {
 
     private void validateMandatoryValues(String name, String email) {
         if (name == null || email == null) {
-            throw new IllegalArgumentException("os campos não podem ser nulos");
+            throw new IllegalArgumentException("Fields cannot be null");
         }
         if (name.isEmpty() || email.isEmpty()) {
-            throw new IllegalArgumentException("todas as informações do cliente devem ser preenchidas");
+            throw new IllegalArgumentException("All customer information must be filled in");
         }
     }
 

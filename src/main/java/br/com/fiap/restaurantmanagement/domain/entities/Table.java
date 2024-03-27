@@ -29,7 +29,7 @@ public class Table {
             throw new IllegalArgumentException("Capacity cannot be less than or equal to zero");
         }
         if (capacity > 4) {
-            throw new IllegalArgumentException("a capacidade máxima de lugares por mesa é de 4");
+            throw new IllegalArgumentException("The maximum seating capacity per table is 4");
         }
 
         this.capacity = capacity;
@@ -37,10 +37,10 @@ public class Table {
 
     public Table(Long id, int capacity) {
         if (capacity <= 0 || id == null) {
-            throw new IllegalArgumentException("a capacidade e o id da mesa devem ser informados");
+            throw new IllegalArgumentException("The capacity and table id must be informed");
         }
         if (capacity > 4) {
-            throw new IllegalArgumentException("a capacidade máxima de lugares por mesa é de 4");
+            throw new IllegalArgumentException("The maximum seating capacity per table is 4");
         }
 
         this.capacity = capacity;
