@@ -1,14 +1,9 @@
 package br.com.fiap.restaurantmanagement.config;
 
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.TableRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.UserRepository;
 import br.com.fiap.restaurantmanagement.domain.entities.Comment;
-import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.*;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SearchAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.*;
 import br.com.fiap.restaurantmanagement.domain.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,30 +22,29 @@ public class RestaurantAppConfig {
     }
 
     @Bean
-    public CreateReservationUseCasePort createReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort,
-                                                                 ReservationRepository reservationRepository,
-                                                                 TableRepository tableRepository,
-                                                                 UserRepository userRepository) {
+    public CreateReservationUseCasePort createReservationUseCase(
+            ReservationAdapterPort reservationSaveAdapterPort,
+            TableAdapterPort tableAdapterPort,
+            UserAdapterPort userAdapterPort) {
 
         return new CreateReservationUseCase(
                 reservationSaveAdapterPort,
-                reservationRepository,
-                tableRepository,
-                userRepository);
+                tableAdapterPort,
+                userAdapterPort);
 
     }
 
     @Bean
-    public FindReservationsUseCasePort findReservationsUseCase(ReservationRepository reservationRepository) {
+    public FindReservationsUseCasePort findReservationsUseCase(ReservationAdapterPort reservationAdapterPort) {
 
-        return  new FindReservationsUseCase(reservationRepository);
+        return  new FindReservationsUseCase(reservationAdapterPort);
 
     }
 
     @Bean
-    public DeleteReservationUseCasePort deleteReservationUseCase(ReservationRepository reservationRepository) {
+    public DeleteReservationUseCasePort deleteReservationUseCase(ReservationAdapterPort reservationAdapterPort) {
 
-        return new DeleteReservationUseCase(reservationRepository);
+        return new DeleteReservationUseCase(reservationAdapterPort);
 
     }
     

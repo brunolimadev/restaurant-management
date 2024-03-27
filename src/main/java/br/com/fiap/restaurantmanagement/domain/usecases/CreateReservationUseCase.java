@@ -1,8 +1,6 @@
 package br.com.fiap.restaurantmanagement.domain.usecases;
 
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.TableRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.UserRepository;
+
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.ReservationModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.TableModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.UserModel;
@@ -10,7 +8,9 @@ import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.exceptions.OccupiedTablesToReservationException;
 import br.com.fiap.restaurantmanagement.domain.exceptions.TransactionException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.ReservationAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.TableAdapterPort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.UserAdapterPort;
 
 import java.util.List;
 import java.util.Random;
@@ -20,25 +20,22 @@ import java.util.Random;
  */
 public class CreateReservationUseCase implements CreateReservationUseCasePort {
 
-  private final SaveAdapterPort<Reservation> reservationSaveAdapterPort;
+  private final ReservationAdapterPort reservationSaveAdapterPort;
 
-  private final ReservationRepository reservationRepository;
+  private final TableAdapterPort tableAdapterPort;
 
-  private final TableRepository tableRepository;
-
-  private final UserRepository userRepository;
+  private final UserAdapterPort userAdapterPort;
 
   private final Random random = new Random();
 
-  public CreateReservationUseCase(SaveAdapterPort<Reservation> reservationSaveAdapterPort,
-                                  ReservationRepository reservationRepository,
-                                  TableRepository tableRepository,
-                                  UserRepository userRepository) {
+  public CreateReservationUseCase(
+          ReservationAdapterPort reservationSaveAdapterPort,
+          TableAdapterPort tableAdapterPort,
+          UserAdapterPort userAdapterPort) {
 
     this.reservationSaveAdapterPort = reservationSaveAdapterPort;
-    this.reservationRepository = reservationRepository;
-    this.tableRepository = tableRepository;
-    this.userRepository = userRepository;
+    this.tableAdapterPort = tableAdapterPort;
+    this.userAdapterPort = userAdapterPort;
 
   }
 
@@ -47,13 +44,13 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
 
     try {
 
-      var reservations = reservationRepository.findReservationsByRestaurant(reservation.getRestaurant().getRestaurantId());
+      var reservations = reservationSaveAdapterPort.findReservationsByRestaurant(reservation.getRestaurant().getRestaurantId());
 
-      var tablesInRestaurant = tableRepository.findTablesByRestaurant(reservation.getRestaurant().getRestaurantId());
+      var tablesInRestaurant = tableAdapterPort.findTablesByRestaurant(reservation.getRestaurant().getRestaurantId());
 
-      var tablesNotReservation = tableRepository.findTablesNotReservation(reservation.getRestaurant().getRestaurantId());
+      var tablesNotReservation = tableAdapterPort.findTablesNotReservation(reservation.getRestaurant().getRestaurantId());
 
-      var user = userRepository.findByEmail(reservation.getClient().getEmail());
+      var user = userAdapterPort.findByEmail(reservation.getClient().getEmail());
 
       return  reservationSaveAdapterPort.save(orchestrateCreateReservation(
               reservations,

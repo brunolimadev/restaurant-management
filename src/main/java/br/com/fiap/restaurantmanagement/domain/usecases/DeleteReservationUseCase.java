@@ -1,17 +1,17 @@
 package br.com.fiap.restaurantmanagement.domain.usecases;
 
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.ReservationRepository;
 import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.exceptions.TransactionException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.DeleteReservationUseCasePort;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.ReservationAdapterPort;
 
 public class DeleteReservationUseCase implements DeleteReservationUseCasePort {
 
-  private final ReservationRepository reservationRepository;
+  private final ReservationAdapterPort reservationAdapterPort;
 
-  public DeleteReservationUseCase(ReservationRepository reservationRepository) {
+  public DeleteReservationUseCase(ReservationAdapterPort reservationAdapterPort) {
 
-    this.reservationRepository = reservationRepository;
+    this.reservationAdapterPort = reservationAdapterPort;
 
   }
 
@@ -20,9 +20,9 @@ public class DeleteReservationUseCase implements DeleteReservationUseCasePort {
 
     try {
 
-      var deletedReservation = reservationRepository.findById(id).orElseThrow();
+      var deletedReservation = reservationAdapterPort.findById(id);
 
-      reservationRepository.deleteById(id);
+      reservationAdapterPort.deleteById(id);
 
       return Reservation.toReservation(deletedReservation);
 
