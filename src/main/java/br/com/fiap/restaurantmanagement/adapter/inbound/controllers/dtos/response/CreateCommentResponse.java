@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class CreateCommentResponse {
 
-    private String mensagemRetorno;
+    private String message;
 
 }
