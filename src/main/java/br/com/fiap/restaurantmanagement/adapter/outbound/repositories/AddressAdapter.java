@@ -11,11 +11,11 @@ import java.util.List;
  * This class represents the address save adapter
  */
 @Component
-public class AddressSaveAdapter implements SaveAdapterPort<List<AddressModel>> {
+public class AddressAdapter implements SaveAdapterPort<List<AddressModel>> {
 
     private final AddressRepository addressRepository;
 
-    public AddressSaveAdapter(AddressRepository addressRepository) {
+    public AddressAdapter(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 

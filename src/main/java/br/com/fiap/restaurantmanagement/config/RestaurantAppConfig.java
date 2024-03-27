@@ -1,14 +1,11 @@
 package br.com.fiap.restaurantmanagement.config;
 
 import br.com.fiap.restaurantmanagement.domain.entities.Comment;
-import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.*;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.*;
 import br.com.fiap.restaurantmanagement.domain.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 /**
  * This class represents the application configuration
@@ -17,8 +14,10 @@ import java.util.List;
 public class RestaurantAppConfig {
 
     @Bean
-    public CreateRestaurantUseCasePort createRestaurantUseCase(SaveAdapterPort<Restaurant> restaurantSaveAdapterPort) {
-        return new CreateRestaurantUseCase(restaurantSaveAdapterPort);
+    public CreateRestaurantUseCasePort createRestaurantUseCase(RestaurantAdapterPort restaurantAdapterPort) {
+
+        return new CreateRestaurantUseCase(restaurantAdapterPort);
+
     }
 
     @Bean
@@ -55,8 +54,10 @@ public class RestaurantAppConfig {
 
 
     @Bean
-    public SearchRestaurantUseCasePort searchRestaurantUseCase(SearchAdapterPort<List<Restaurant>> searchRestaurantUseCasePort) {
-        return new SearchRestaurantUseCase(searchRestaurantUseCasePort);
+    public SearchRestaurantUseCasePort searchRestaurantUseCase(RestaurantAdapterPort restaurantAdapterPort) {
+
+        return new SearchRestaurantUseCase(restaurantAdapterPort);
+
     }
 
 }
