@@ -6,16 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * This class represents the create reservation response
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateReservationResponse {
+public class DeleteReservationResponse {
 
-    private Reservation reservation;
-    private String message;
+  private Reservation reservation;
 
 }

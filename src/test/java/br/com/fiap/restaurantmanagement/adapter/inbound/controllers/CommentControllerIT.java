@@ -1,5 +1,6 @@
 package br.com.fiap.restaurantmanagement.adapter.inbound.controllers;
 
+import br.com.fiap.restaurantmanagement.utils.CommentHelper;
 import br.com.fiap.restaurantmanagement.utils.RestaurantHelper;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,7 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-public class RestaurantControllerIT {
+public class CommentControllerIT {
 
     @LocalServerPort
     private int serverPort;
@@ -29,28 +30,17 @@ public class RestaurantControllerIT {
     }
 
     @Nested
-    class RegisterRestaurant{
+    class RegisterComment{
 
         @Test
-        void shouldRegisterRestaurant(){
+        void shouldRegisterComment(){
             given()
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body(RestaurantHelper.createRestaurantRequestJson())
+                    .body(CommentHelper.createCommentRequestJson())
             .when()
-                    .post("/restaurant-management/api/restaurant")
+                    .post("/restaurant-management/api/comment")
             .then()
                     .statusCode(HttpStatus.CREATED.value());
-        }
-
-        @Test
-        void shouldSearchARestaurant(){
-            given()
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .queryParam("name", "Sushi Yoshi")
-                    .when()
-                    .get("/restaurant-management/api/restaurant")
-                    .then()
-                    .statusCode(HttpStatus.OK.value());
         }
 
     }

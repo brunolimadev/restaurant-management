@@ -6,5 +6,5 @@ import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
  * This interface represents the port for creating a reservation
  */
 public interface CreateReservationUseCasePort {
-    Reservation execute(Reservation restaurant);
+    Reservation execute(Reservation reservation);
 }

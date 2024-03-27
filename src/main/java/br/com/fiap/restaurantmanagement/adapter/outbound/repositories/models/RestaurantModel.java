@@ -43,6 +43,9 @@ public class RestaurantModel {
         return restaurantModel;
     }
 
+    public RestaurantModel(Long id) {
+        this.id = id;
+    }
 
     public Restaurant toDomain() {
         return new Restaurant(this.id, this.name, this.foodType.toDomain());
