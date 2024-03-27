@@ -11,11 +11,11 @@ import java.util.List;
  * This class represents the opening hour save adapter
  */
 @Component
-public class OpeningHourSaveAdapter implements SaveAdapterPort<List<OpeningHourModel>> {
+public class OpeningHourAdapter implements SaveAdapterPort<List<OpeningHourModel>> {
 
     private final OpeningHourRepository openingHourRepository;
 
-    public OpeningHourSaveAdapter(OpeningHourRepository openingHourRepository) {
+    public OpeningHourAdapter(OpeningHourRepository openingHourRepository) {
         this.openingHourRepository = openingHourRepository;
     }
 

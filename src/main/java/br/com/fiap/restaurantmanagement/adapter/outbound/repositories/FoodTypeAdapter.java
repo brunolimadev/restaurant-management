@@ -11,11 +11,11 @@ import java.util.Optional;
  * This class represents the food type save adapter
  */
 @Component
-public class FoodTypeSaveAdapter implements SaveAdapterPort<FoodTypeModel> {
+public class FoodTypeAdapter implements SaveAdapterPort<FoodTypeModel> {
 
     private final FoodTypeRepository foodTypeRepository;
 
-    public FoodTypeSaveAdapter(FoodTypeRepository foodTypeRepository) {
+    public FoodTypeAdapter(FoodTypeRepository foodTypeRepository) {
         this.foodTypeRepository = foodTypeRepository;
     }
 

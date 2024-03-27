@@ -4,13 +4,14 @@ import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.FoodTypeModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
 import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
+import br.com.fiap.restaurantmanagement.domain.ports.outbound.RestaurantAdapterPort;
 import br.com.fiap.restaurantmanagement.utils.RestaurantHelper;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -18,9 +19,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class SaveRestaurantAdapterTest {
+class SaveRestaurantAdapterPortTest {
 
-    private RestaurantSaveAdapter saveRestaurantAdapter;
+    private RestaurantAdapterPort restaurantAdapterPort;
+
+    @Mock
+    private EntityManager entityManager;
 
     @Mock
     private RestaurantRepository restaurantRepository;
@@ -41,15 +45,18 @@ class SaveRestaurantAdapterTest {
 
     @BeforeEach
     void setup() {
+
         openMocks = MockitoAnnotations.openMocks(this);
 
-        saveRestaurantAdapter = new RestaurantSaveAdapter(
+        restaurantAdapterPort = new RestaurantAdapter(
+                entityManager,
                 restaurantRepository,
-                new FoodTypeSaveAdapter(foodTypeRepository),
-                new AddressSaveAdapter(addressRepository),
-                new TableSaveAdapter(tableRepository),
-                new OpeningHourSaveAdapter(openingHourRepository)
+                new FoodTypeAdapter(foodTypeRepository),
+                new AddressAdapter(addressRepository),
+                new TableAdapter(tableRepository),
+                new OpeningHourAdapter(openingHourRepository)
         );
+
     }
 
     @AfterEach
@@ -59,7 +66,8 @@ class SaveRestaurantAdapterTest {
 
     @Test
     void shouldCreateRestaurant() {
-        // arrange
+
+        //Arrange
         var restaurant = RestaurantHelper.createRestaurant();
         var restaurantModel = RestaurantHelper.createRestaurantModel();
 
@@ -69,16 +77,14 @@ class SaveRestaurantAdapterTest {
         when(foodTypeRepository.save(any(FoodTypeModel.class))).thenReturn(FoodTypeModel.fromDomain(TypesOfFood.BRAZILIAN, null));
         when(restaurantRepository.save(any(RestaurantModel.class))).thenReturn(restaurantModel);
 
-        // act
-        var restaurantSaved = saveRestaurantAdapter.save(restaurant);
+        //Act
+        var restaurantSaved = restaurantAdapterPort.save(restaurant);
 
-        // assert
+        //Assert
         assertThat(restaurantSaved).isNotNull();
         assertThat(restaurantSaved.getName()).isEqualTo(restaurant.getName());
         verify(restaurantRepository, times(1)).save(restaurantModel);
+
     }
-
-
-
 
 }

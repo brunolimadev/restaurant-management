@@ -27,9 +27,13 @@ public class RestaurantController {
 
     private final SearchRestaurantUseCasePort searchRestaurantUseCasePort;
 
-    public RestaurantController(CreateRestaurantUseCasePort createRestaurantUseCasePort, SearchRestaurantUseCasePort searchRestaurantUseCasePort) {
+    public RestaurantController(
+            CreateRestaurantUseCasePort createRestaurantUseCasePort,
+            SearchRestaurantUseCasePort searchRestaurantUseCasePort) {
+
         this.createRestaurantUseCasePort = createRestaurantUseCasePort;
         this.searchRestaurantUseCasePort = searchRestaurantUseCasePort;
+
     }
 
     @GetMapping
