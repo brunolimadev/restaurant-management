@@ -20,14 +20,8 @@ public class CommentSaveAdapter implements SaveAdapterPort<Comment> {
 
     private final CommentRepository commentRepository;
 
-    private final UserRepository userRepository;
-
-    private final RestaurantRepository restaurantRepository;
-
-    public CommentSaveAdapter(CommentRepository commentRepository, UserRepository userRepository, RestaurantRepository restaurantRepository) {
+    public CommentSaveAdapter(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
-        this.restaurantRepository = restaurantRepository;
     }
 
     @Override

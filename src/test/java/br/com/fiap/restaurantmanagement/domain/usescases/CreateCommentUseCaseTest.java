@@ -46,8 +46,7 @@ class CreateCommentUseCaseTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        SaveAdapterPort saveAdapterPort = new CommentSaveAdapter(
-                commentRepository, userRepository, restaurantRepository);
+        SaveAdapterPort saveAdapterPort = new CommentSaveAdapter(commentRepository);
         createCommentUseCase = new CreateCommentUseCase(saveAdapterPort);
     }
 
