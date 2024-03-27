@@ -49,7 +49,9 @@ public class RestaurantAppConfig {
     
     @Bean
     public CreateCommentUseCasePort createCommentUseCase(SaveAdapterPort<Comment> commentSaveAdapterPort){
+
         return new CreateCommentUseCase(commentSaveAdapterPort);
+
     }
 
 

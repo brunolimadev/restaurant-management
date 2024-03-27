@@ -17,7 +17,9 @@ public class CommentController {
     private final CreateCommentUseCasePort createCommentUseCasePort;
 
     public CommentController(CreateCommentUseCasePort createCommentUseCasePort) {
+
         this.createCommentUseCasePort = createCommentUseCasePort;
+
     }
 
     @PostMapping
@@ -36,7 +38,7 @@ public class CommentController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 CreateCommentResponse.builder()
-                        .message("Comment successfully registered!")
+                        .message("Comment successfully registered")
                         .build());
     }
 }

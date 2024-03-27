@@ -1,6 +1,6 @@
 package br.com.fiap.restaurantmanagement.domain.usescases;
 
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.CommentSaveAdapter;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.CommentAdapter;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.CommentRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.RestaurantRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.UserRepository;
@@ -46,7 +46,7 @@ class CreateCommentUseCaseTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        SaveAdapterPort saveAdapterPort = new CommentSaveAdapter(commentRepository);
+        SaveAdapterPort saveAdapterPort = new CommentAdapter(commentRepository);
         createCommentUseCase = new CreateCommentUseCase(saveAdapterPort);
     }
 

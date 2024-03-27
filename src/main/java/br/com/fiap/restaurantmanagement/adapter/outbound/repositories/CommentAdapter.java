@@ -1,8 +1,6 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.CommentRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.RestaurantRepository;
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.UserRepository;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantCommentModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.UserModel;
@@ -13,14 +11,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Component
-public class CommentSaveAdapter implements SaveAdapterPort<Comment> {
+public class CommentAdapter implements SaveAdapterPort<Comment> {
 
     private final CommentRepository commentRepository;
 
-    public CommentSaveAdapter(CommentRepository commentRepository) {
+    public CommentAdapter(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
@@ -36,11 +33,17 @@ public class CommentSaveAdapter implements SaveAdapterPort<Comment> {
         commentModel.setRating(entity.getRating());
 
         try {
-            commentRepository.save(commentModel);
-        } catch (DataAccessException e) {
-            throw new IllegalArgumentException("Verifique os parâmetros de entrada.");
-        }
-        return commentModel.toDomain();
-    }
-}
 
+            commentRepository.save(commentModel);
+
+        } catch (DataAccessException e) {
+
+            throw new IllegalArgumentException("Check input parameters");
+
+        }
+
+        return commentModel.toDomain();
+
+    }
+
+}
