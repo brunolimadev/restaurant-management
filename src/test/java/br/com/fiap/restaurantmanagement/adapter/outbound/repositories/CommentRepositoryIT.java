@@ -46,6 +46,7 @@ class CommentRepositoryIT {
         commentModel.setUser(new UserModel(1L,"Usuario Teste","usuario@gmail.com","99999-9999"));
         commentModel.setRestaurant(new RestaurantModel(1L));
         commentModel.setComment("Comentário de teste");
+        commentModel.setRating(5L);
 
         return commentModel;
     }

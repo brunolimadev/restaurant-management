@@ -43,6 +43,9 @@ public class RestaurantCommentModel {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(name = "rating")
+    private Long rating;
+
     public static List<RestaurantCommentModel> fromDomain(Restaurant restaurant) {
 
         List<RestaurantCommentModel> commentModels = new ArrayList<>();
@@ -58,6 +61,6 @@ public class RestaurantCommentModel {
     }
 
     public Comment toDomain() {
-        return new Comment(this.id,this.comment,this.restaurant.getId(), this.getCreatedAt());
+        return new Comment(this.id,this.comment,this.restaurant.getId(), this.getCreatedAt(), this.rating);
     }
 }

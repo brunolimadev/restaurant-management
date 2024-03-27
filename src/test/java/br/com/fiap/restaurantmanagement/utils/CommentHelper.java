@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class CommentHelper {
 
     public static Comment createComment(){
-        return new Comment(1L,"Comment Exemple",1L, LocalDateTime.now());
+        return new Comment(1L,"Comment Exemple",1L, LocalDateTime.now(),5L);
     }
 
     public static CreateRestaurantCommentRequest createCommentRequest() {
@@ -26,7 +26,8 @@ public class CommentHelper {
                 {
                   "restaurantId": 1,
                   "userId": 1,
-                  "comment": "Comentário teste"
+                  "comment": "Comentário teste",
+                  "rating" : 5
                    \s
                 }""";
     }

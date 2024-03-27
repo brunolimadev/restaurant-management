@@ -85,7 +85,7 @@ class CreateCommentUseCaseTest {
     }
 
     private Comment createComment() {
-        return new Comment(1L, "Comment Exemple", 1L, LocalDateTime.now());
+        return new Comment(1L, "Comment Exemple", 1L, LocalDateTime.now(),5L);
     }
 
 }
