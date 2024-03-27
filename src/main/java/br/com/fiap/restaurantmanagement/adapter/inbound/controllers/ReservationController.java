@@ -8,13 +8,10 @@ import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.DeleteReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.FindReservationsUseCasePort;
-import br.com.fiap.restaurantmanagement.domain.usecases.DeleteReservationUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -41,23 +38,22 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateReservationResponse> createReservation(@RequestBody CreateReservationRequest createReservationRequest) {
+    public ResponseEntity<CreateReservationResponse> createReservation(
+            @RequestBody CreateReservationRequest createReservationRequest) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(
                         CreateReservationResponse
                         .builder()
                         .reservation(createReservationUseCasePort.execute(createReservationRequest.toDomain()))
-                        .message("Reserva realizada com sucesso")
+                        .message("Reservation made successfully")
                         .build()
                 );
     }
 
     @GetMapping
     public ResponseEntity<List<Reservation>> getReservations(
-            @RequestHeader("restaurant_id") String restaurantId,
-            @RequestHeader("date") String date,
-            @RequestHeader("time") String time) {
+            @RequestHeader("restaurant_id") String restaurantId) {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(
@@ -67,8 +63,6 @@ public class ReservationController {
                                 GetReservationsRequestHeaders
                                         .builder()
                                         .restaurantId(Long.parseLong(restaurantId))
-                                        .date(LocalDate.parse(date))
-                                        .time(LocalTime.parse(time))
                                         .build())
                         )
                         .build().getReservations()
