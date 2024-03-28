@@ -44,7 +44,7 @@ public class RestaurantController {
 
     @Operation(summary = "Search Restaurants")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "200", description = "Get a list of restaurants by parameters"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     @GetMapping
