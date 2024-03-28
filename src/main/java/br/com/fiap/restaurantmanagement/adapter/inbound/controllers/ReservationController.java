@@ -8,6 +8,11 @@ import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.DeleteReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.FindReservationsUseCasePort;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +24,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/reservation")
+@Tag(name = "Reservation Controller",
+     description = "When the customer finds the restaurant, they can make a reservation for a specific day and time as long as the restaurant's capacity has not reached its maximum for that date and time.")
 public class ReservationController {
 
     private final CreateReservationUseCasePort createReservationUseCasePort;
@@ -37,6 +44,10 @@ public class ReservationController {
         this.deleteReservationUseCasePort = deleteReservationUseCasePort;
     }
 
+    @Operation(summary = "Register reservation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Reservation made successfully")
+    })
     @PostMapping
     public ResponseEntity<CreateReservationResponse> createReservation(
             @RequestBody CreateReservationRequest createReservationRequest) {
@@ -51,8 +62,13 @@ public class ReservationController {
                 );
     }
 
+    @Operation(summary = "Search for reservations")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created")
+    })
     @GetMapping
     public ResponseEntity<List<Reservation>> getReservations(
+            @Parameter(description = "restaurant id", required = true)
             @RequestHeader("restaurant_id") String restaurantId) {
 
         return ResponseEntity.status(HttpStatus.OK)
@@ -70,9 +86,14 @@ public class ReservationController {
 
     }
 
+    @Operation(summary = "Cancel reservation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "reservation id"),
+    })
     @DeleteMapping
     @RequestMapping("{id}")
-    public ResponseEntity<Reservation> deleteReservation(
+        public ResponseEntity<Reservation> deleteReservation(
+            @Parameter(description = "Reservation id", required = true)
             @PathVariable("id") String id
     ) {
 

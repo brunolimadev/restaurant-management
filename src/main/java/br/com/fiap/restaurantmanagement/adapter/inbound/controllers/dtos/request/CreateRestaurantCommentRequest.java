@@ -11,16 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class CreateRestaurantCommentRequest {
 
-    @Schema(description = "Id to Restaurant", example = "1",minimum = "1")
-
+    @Schema(description = "Id to restaurant", example = "1")
     private Long restaurantId;
 
-    @Schema(description = "Id to User", example = "1",minimum = "1")
+    @Schema(description = "Id to User", example = "1")
     private Long userId;
 
-    @Schema(description = "Comment", example = "Beatyful",minimum = "1",requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Comment", example = "Wonderful restaurant, good food, excellent dishes!", minimum = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private String comment;
 
     @Schema(description = "Rating", example = "5", minimum = "1")

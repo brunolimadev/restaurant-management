@@ -3,6 +3,7 @@ package br.com.fiap.restaurantmanagement.adapter.inbound.controllers.dtos.reques
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
 import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +20,10 @@ import java.util.List;
 @Builder
 public class CreateRestaurantRequest {
 
+    @Schema(description = "name", example = "Dona Chica")
     private String name;
 
+    @Schema(description = "food type", example = "BRAZILIAN")
     private String foodType;
 
     private List<CreateRestaurantAddressRequest> address;

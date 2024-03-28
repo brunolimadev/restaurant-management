@@ -8,7 +8,8 @@ import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateRestaurantUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.SearchRestaurantUseCasePort;
-import br.com.fiap.restaurantmanagement.domain.usecases.SearchRestaurantUseCase;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/restaurant")
+@Tag(name = "Restaurant Controller",
+     description = "Restaurant owners will register their establishments in this option, informing the name, location, type of cuisine, opening hours and capacity.")
 public class RestaurantController {
 
     private final CreateRestaurantUseCasePort createRestaurantUseCasePort;
@@ -38,9 +41,9 @@ public class RestaurantController {
 
     @GetMapping
     public ResponseEntity<SearchRestaurantResponse> getRestaurant(
-            @RequestParam("name") Optional<String> name,
-            @RequestParam("location") Optional<String> location,
-            @RequestParam("typeOfFood") Optional<String> typeOfFood
+            @Parameter(description = "name", example = "Dona Chica") @RequestParam("name") Optional<String> name,
+            @Parameter(description = "location", example = "São Paulo") @RequestParam("location") Optional<String> location,
+            @Parameter(description = "type of food", example = "BRAZILIAN") @RequestParam("typeOfFood") Optional<String> typeOfFood
     ) throws FoodTypeNotFoundException {
 
         SearchRestaurantResponse response = new SearchRestaurantResponse();
