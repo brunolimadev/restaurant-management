@@ -46,7 +46,7 @@ public class ReservationController {
 
     @Operation(summary = "Register reservation")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Reservation made successfully")
+            @ApiResponse(responseCode = "201", description = "Return the reservation created")
     })
     @PostMapping
     public ResponseEntity<CreateReservationResponse> createReservation(
@@ -64,7 +64,7 @@ public class ReservationController {
 
     @Operation(summary = "Search for reservations")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created")
+            @ApiResponse(responseCode = "200", description = "Get a list of reservations by restaurant")
     })
     @GetMapping
     public ResponseEntity<List<Reservation>> getReservations(
@@ -88,10 +88,9 @@ public class ReservationController {
 
     @Operation(summary = "Cancel reservation")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "reservation id"),
+            @ApiResponse(responseCode = "200", description = "Remove a reservation by id"),
     })
-    @DeleteMapping
-    @RequestMapping("{id}")
+    @DeleteMapping(value = "{id}")
         public ResponseEntity<Reservation> deleteReservation(
             @Parameter(description = "Reservation id", required = true)
             @PathVariable("id") String id
@@ -103,4 +102,5 @@ public class ReservationController {
                 );
 
     }
+
 }
