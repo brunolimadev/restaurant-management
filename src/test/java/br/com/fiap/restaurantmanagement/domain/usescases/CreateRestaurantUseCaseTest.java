@@ -9,14 +9,13 @@ import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.entities.Table;
 import br.com.fiap.restaurantmanagement.domain.enumerators.DaysOfWeek;
 import br.com.fiap.restaurantmanagement.domain.enumerators.TypesOfFood;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 import br.com.fiap.restaurantmanagement.domain.usecases.CreateRestaurantUseCase;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -27,6 +26,9 @@ import static org.mockito.Mockito.*;
 class CreateRestaurantUseCaseTest {
 
     private CreateRestaurantUseCase createRestaurantUseCase;
+
+    @Mock
+    private EntityManager entityManager;
 
     @Mock
     private RestaurantRepository restaurantRepository;
@@ -48,12 +50,13 @@ class CreateRestaurantUseCaseTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        SaveAdapterPort saveAdapterPort = new RestaurantSaveAdapter(
+        RestaurantAdapter saveAdapterPort = new RestaurantAdapter(
+                entityManager,
                 restaurantRepository,
-                new FoodTypeSaveAdapter(foodTypeRepository),
-                new AddressSaveAdapter(addressRepository),
-                new TableSaveAdapter(tableRepository),
-                new OpeningHourSaveAdapter(openingHourRepository)
+                new FoodTypeAdapter(foodTypeRepository),
+                new AddressAdapter(addressRepository),
+                new TableAdapter(tableRepository),
+                new OpeningHourAdapter(openingHourRepository)
         );
         createRestaurantUseCase = new CreateRestaurantUseCase(saveAdapterPort);
     }

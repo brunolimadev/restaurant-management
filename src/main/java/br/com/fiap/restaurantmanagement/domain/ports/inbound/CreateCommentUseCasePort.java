@@ -4,7 +4,6 @@ import br.com.fiap.restaurantmanagement.domain.entities.Comment;
 
 public interface CreateCommentUseCasePort {
 
-    public Comment execute(Comment comment);
-
+    Comment execute(Comment comment);
 
 }

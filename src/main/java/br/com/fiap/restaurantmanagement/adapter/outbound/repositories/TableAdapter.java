@@ -19,9 +19,9 @@ public class TableAdapter implements TableAdapterPort {
   }
 
   @Override
-  public List<TableModel> save(List<TableModel> entity) {
+  public List<TableModel> save(List<TableModel> tableModelList) {
 
-    return null;
+    return tableRepository.saveAll(tableModelList);
 
   }
 

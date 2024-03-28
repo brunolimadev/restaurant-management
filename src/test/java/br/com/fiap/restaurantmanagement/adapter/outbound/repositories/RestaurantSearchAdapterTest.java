@@ -1,5 +1,6 @@
 package br.com.fiap.restaurantmanagement.adapter.outbound.repositories;
 
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.*;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.AddressModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.FoodTypeModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
@@ -23,12 +24,27 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 
-public class RestaurantSearchAdapterTest {
+class RestaurantSearchAdapterTest {
 
-    private RestaurantSearchAdapter restaurantSearchAdapter;
+    private RestaurantAdapter restaurantAdapterPort;
 
     @Mock
     private EntityManager entityManager;
+
+    @Mock
+    private RestaurantRepository restaurantRepository;
+
+    @Mock
+    private AddressRepository addressRepository;
+
+    @Mock
+    private FoodTypeRepository foodTypeRepository;
+
+    @Mock
+    private OpeningHourRepository openingHourRepository;
+
+    @Mock
+    private TableRepository tableRepository;
 
     @Mock
     private CriteriaBuilder criteriaBuilder;
@@ -55,8 +71,13 @@ public class RestaurantSearchAdapterTest {
 
         openMocks = MockitoAnnotations.openMocks(this);
 
-        restaurantSearchAdapter = new RestaurantSearchAdapter(
-                entityManager
+        restaurantAdapterPort = new RestaurantAdapter(
+                entityManager,
+                restaurantRepository,
+                new FoodTypeAdapter(foodTypeRepository),
+                new AddressAdapter(addressRepository),
+                new TableAdapter(tableRepository),
+                new OpeningHourAdapter(openingHourRepository)
         );
 
     }
@@ -87,7 +108,7 @@ public class RestaurantSearchAdapterTest {
 
 
         // act
-        var result = restaurantSearchAdapter.search(location, name, foodType);
+        var result = restaurantAdapterPort.search(location, name, foodType);
 
 
         // assert

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bd87726f-9f9a-44cb-8a8c-025726b8a1d8",
+		"_postman_id": "34976c96-715f-4149-b37f-48055b496843",
 		"name": "Fiap - Restaurants",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11174996"
+		"_exporter_id": "16268430"
 	},
 	"item": [
 		{
@@ -193,8 +193,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:8080/restaurant-management/api/restaurant?name=Yoshi Sushi&location=Av. Paulista&foodType=japanase",
-							"protocol": "https",
+							"raw": "http://localhost:8080/restaurant-management/api/restaurant?name=Yoshi Sushi&location=Av. Paulista&foodType=japanase",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -229,7 +229,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"userId\": 1,\r\n    \"comment\": \"Excelente restaurante\"\r\n}",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"userId\": 2,\r\n    \"comment\": \"Excelente restaurante\",\r\n    \"rating\" : 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -237,8 +237,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:8080/restaurant-management/api/comment",
-							"protocol": "https",
+							"raw": "http://localhost:8080/restaurant-management/api/comment",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -413,7 +413,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"userId\": 1,\r\n    \"comment\": \"Excelente restaurante\"\r\n}",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"userId\": 2,\r\n    \"comment\": \"Excelente restaurante\",\r\n    \"rating\" : 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

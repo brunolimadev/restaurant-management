@@ -1,12 +1,12 @@
 package br.com.fiap.restaurantmanagement.domain.usescases;
 
-import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.RestaurantSearchAdapter;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.*;
+import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.interfaces.*;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.AddressModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.FoodTypeModel;
 import br.com.fiap.restaurantmanagement.adapter.outbound.repositories.models.RestaurantModel;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
-import br.com.fiap.restaurantmanagement.domain.ports.outbound.SearchAdapterPort;
 import br.com.fiap.restaurantmanagement.domain.usecases.SearchRestaurantUseCase;
 import br.com.fiap.restaurantmanagement.utils.RestaurantHelper;
 import jakarta.persistence.EntityManager;
@@ -29,12 +29,27 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
-public class SearchRestaurantUseCaseTest {
+class SearchRestaurantUseCaseTest {
 
     private SearchRestaurantUseCase searchRestaurantUseCase;
 
     @Mock
-    EntityManager entityManager;
+    private EntityManager entityManager;
+
+    @Mock
+    private RestaurantRepository restaurantRepository;
+
+    @Mock
+    private AddressRepository addressRepository;
+
+    @Mock
+    private FoodTypeRepository foodTypeRepository;
+
+    @Mock
+    private OpeningHourRepository openingHourRepository;
+
+    @Mock
+    private TableRepository tableRepository;
 
     @Mock
     private CriteriaBuilder criteriaBuilder;
@@ -58,9 +73,19 @@ public class SearchRestaurantUseCaseTest {
 
     @BeforeEach
     void setup() {
+
         openMocks = MockitoAnnotations.openMocks(this);
-        SearchAdapterPort<List<Restaurant>> searchAdapterPort = new RestaurantSearchAdapter(entityManager);
+        RestaurantAdapter searchAdapterPort = new RestaurantAdapter(
+                entityManager,
+                restaurantRepository,
+                new FoodTypeAdapter(foodTypeRepository),
+                new AddressAdapter(addressRepository),
+                new TableAdapter(tableRepository),
+                new OpeningHourAdapter(openingHourRepository)
+        );
+
         searchRestaurantUseCase = new SearchRestaurantUseCase(searchAdapterPort);
+
     }
 
     @AfterEach
@@ -99,7 +124,7 @@ public class SearchRestaurantUseCaseTest {
     @Test
     void shouldThrowAExcpetion(){
 
-        // arrange
+        //Arrange
         Optional<String> location = Optional.of("São Paulo");
         Optional<String> name = Optional.of("Japa");
         Optional<String> foodType = Optional.of("Variado");
@@ -115,9 +140,10 @@ public class SearchRestaurantUseCaseTest {
         when(entityManager.createQuery(criteriaQuery)).thenReturn(query);
         when(query.getResultList()).thenReturn(List.of(RestaurantHelper.createAddressModel()));
 
-        // assert
+        //Assert
         assertThatThrownBy(() ->  searchRestaurantUseCase.execute(location, name, foodType))
                 .isInstanceOf(FoodTypeNotFoundException.class)
                 .hasMessage("Invalid type of food");
     }
+
 }

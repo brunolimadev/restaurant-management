@@ -111,7 +111,7 @@ public class CreateReservationUseCase implements CreateReservationUseCasePort {
           Reservation reservation,
           UserModel user) {
 
-        var tableSelect = random.nextInt(tablesInRestaurant.size() - 1);
+        var tableSelect = random.nextInt(tablesInRestaurant.size());
         var table = tablesInRestaurant.get(tableSelect);
 
         reservation.getRestaurant().getTable().setId(table.getId());

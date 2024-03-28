@@ -66,7 +66,7 @@
 - [Dbeaver](https://dbeaver.io/download/)
 
 ## 📋 Diagrama ER
-![img_2.png](img_2.png)
+![img_2.png](src/main/resources/images/img_2.png)
 
 
 ## 📋 Swagger
@@ -76,7 +76,7 @@
 
 
 ## 😎 Collection para testes
-- [fiap_restaurants.postman_collection.json](https://github.com/brunolimadev/restaurant-management/blob/3693bc1728a880714d3f86c524a72411041a8410/fiap_restaurants.postman_collection.json?raw=true)
+- [fiap_restaurants.postman_collection.zip](https://github.com/brunolimadev/restaurant-management/blob/a486668a0eb26751568bd2191de6cc93a629d773/src/test/resources/collections/fiap_restaurants.postman_collection.zip?raw=true)
 
 
 

@@ -1,7 +1,5 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -67,18 +65,25 @@ public class Comment {
 
 	@Override
 	public boolean equals(Object o) {
+
 		if (this == o) return true;
+
 		if (o == null || getClass() != o.getClass()) return false;
+
 		Comment comment1 = (Comment) o;
-		return Objects.equals(userId, comment1.userId) && Objects.equals(comment, comment1.comment) && Objects.equals(idRestaurant, comment1.idRestaurant) && Objects.equals(createAt, comment1.createAt) && Objects.equals(rating, comment1.rating);
+		return Objects.equals(userId, comment1.userId)
+						&& Objects.equals(comment, comment1.comment)
+						&& Objects.equals(idRestaurant, comment1.idRestaurant)
+						&& Objects.equals(createAt, comment1.createAt)
+						&& Objects.equals(rating, comment1.rating);
+
 	}
 
 	@Override
 	public int hashCode() {
+
 		return Objects.hash(userId, comment, idRestaurant, createAt, rating);
+
 	}
+
 }
-
-
-
-
