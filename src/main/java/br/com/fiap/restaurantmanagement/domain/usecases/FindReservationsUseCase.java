@@ -10,6 +10,9 @@ import br.com.fiap.restaurantmanagement.domain.ports.outbound.ReservationAdapter
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the use case to search for a restaurant
+ */
 public class FindReservationsUseCase implements FindReservationsUseCasePort {
 
   private final ReservationAdapterPort reservationAdapterPort;

@@ -3,7 +3,7 @@ package br.com.fiap.restaurantmanagement.domain.ports.inbound;
 import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 
 /**
- * This interface represents the port for creating a restaurant
+ * This interface represents the gateway to searching for restaurant reservations
  */
 public interface CreateRestaurantUseCasePort {
 

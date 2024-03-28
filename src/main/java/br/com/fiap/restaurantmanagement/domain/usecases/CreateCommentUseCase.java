@@ -4,6 +4,9 @@ import br.com.fiap.restaurantmanagement.domain.entities.Comment;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateCommentUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.SaveAdapterPort;
 
+/**
+ * This class represents the use case for making a comment about the restaurant
+ */
 public class CreateCommentUseCase implements CreateCommentUseCasePort {
 
     private final SaveAdapterPort<Comment> saveCommentAdapterPort;

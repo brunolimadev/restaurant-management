@@ -5,6 +5,9 @@ import br.com.fiap.restaurantmanagement.domain.exceptions.TransactionException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.DeleteReservationUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.outbound.ReservationAdapterPort;
 
+/**
+ * This class represents the use case for canceling a reservation
+ */
 public class DeleteReservationUseCase implements DeleteReservationUseCasePort {
 
   private final ReservationAdapterPort reservationAdapterPort;

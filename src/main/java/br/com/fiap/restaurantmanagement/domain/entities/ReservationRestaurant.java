@@ -1,5 +1,8 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
+/**
+ * This class represents a reservation at the restaurant
+ */
 public class ReservationRestaurant {
 
     private Long restaurantId;

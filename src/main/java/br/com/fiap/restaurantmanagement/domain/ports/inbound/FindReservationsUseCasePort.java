@@ -5,6 +5,9 @@ import br.com.fiap.restaurantmanagement.domain.entities.Reservation;
 
 import java.util.List;
 
+/**
+ This interface represents the gateway to searching for restaurant reservations
+ */
 public interface FindReservationsUseCasePort {
 
   List<Reservation> get(GetReservationsRequestHeaders getReservationsRequestHeaders);

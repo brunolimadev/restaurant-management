@@ -1,5 +1,8 @@
 package br.com.fiap.restaurantmanagement.domain.entities;
 
+/**
+ * This class represents the clients of a restaurant
+ */
 public class Client {
 
     private Long id;
