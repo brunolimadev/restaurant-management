@@ -8,7 +8,10 @@ import br.com.fiap.restaurantmanagement.domain.entities.Restaurant;
 import br.com.fiap.restaurantmanagement.domain.exceptions.FoodTypeNotFoundException;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.CreateRestaurantUseCasePort;
 import br.com.fiap.restaurantmanagement.domain.ports.inbound.SearchRestaurantUseCasePort;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +42,11 @@ public class RestaurantController {
 
     }
 
+    @Operation(summary = "Search Restaurants")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
     @GetMapping
     public ResponseEntity<SearchRestaurantResponse> getRestaurant(
             @Parameter(description = "name", example = "Dona Chica") @RequestParam("name") Optional<String> name,
@@ -63,6 +71,11 @@ public class RestaurantController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Register Restaurants")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
     @PostMapping
     public ResponseEntity<CreateRestaurantResponse> createRestaurant(@RequestBody CreateRestaurantRequest createRestaurantRequest) throws FoodTypeNotFoundException {
 
